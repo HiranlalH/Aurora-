@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Hairnic - Single Product Website Template</title>
+    <title>Aurora</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -50,7 +50,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light p-0">
                 <a href="{% url 'index' %}" class="navbar-brand">
-                    <h2 class="text-white">Hairnic</h2>
+                    <h2 class="text-white">Aurora</h2>
                 </a>
                 <button type="button" class="navbar-toggler ms-auto me-0" data-bs-toggle="collapse"
                     data-bs-target="#navbarCollapse">
@@ -176,7 +176,7 @@
             <div class="row g-5">
                 <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
                     <a href="{% url 'index' %}" class="d-inline-block mb-3">
-                        <h1 class="text-primary">Hairnic</h1>
+                        <h1 class="text-primary">Aurora</h1>
                     </a>
                     <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aliquet, erat non
                         malesuada consequat, nibh erat tempus risus, vitae porttitor purus nisl vitae purus.</p>
@@ -249,7 +249,7 @@
     <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
 
     <!-- Template Javascript -->
-    <script src="{ % static js/main.js % }"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 </body>
 
 </html>
