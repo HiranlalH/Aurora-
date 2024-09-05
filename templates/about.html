@@ -1,9 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>Hairnic - Single Product Website Template</title>
+    <title>Aurora - About Us</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -27,10 +28,10 @@
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
 </head>
 
 <body>
@@ -48,8 +49,8 @@
     <div class="container-fluid sticky-top">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light p-0">
-                <a href="index.html" class="navbar-brand">
-                    <h2 class="text-white">Hairnic</h2>
+                <a href="{% url 'index' %}" class="navbar-brand">
+                    <h2 class="text-white">Aurora</h2>
                 </a>
                 <button type="button" class="navbar-toggler ms-auto me-0" data-bs-toggle="collapse"
                     data-bs-target="#navbarCollapse">
@@ -57,20 +58,20 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
-                        <a href="index.html" class="nav-item nav-link">Home</a>
-                        <a href="about.html" class="nav-item nav-link active">About</a>
-                        <a href="product.html" class="nav-item nav-link">Products</a>
+                        <a href="{% url 'index' %}" class="nav-item nav-link">Home</a>
+                        <a href="{% url 'about' %}" class="nav-item nav-link active">About</a>
+                        <a href="{% url 'product' %}" class="nav-item nav-link">Products</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu bg-light mt-2">
-                                <a href="feature.html" class="dropdown-item">Features</a>
-                                <a href="how-to-use.html" class="dropdown-item">How To Use</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                <a href="blog.html" class="dropdown-item">Blog Articles</a>
-                                <a href="404.html" class="dropdown-item">404 Page</a>
+                                <a href="{% url 'feature' %}" class="dropdown-item">Features</a>
+                                <a href="{% url 'how_to_use' %}" class="dropdown-item">How To Use</a>
+                                <a href="{% url 'testimonial' %}" class="dropdown-item">Testimonial</a>
+                                <a href="{% url 'blog' %}" class="dropdown-item">Blog Articles</a>
+                                <a href="{% url 'error' %}" class="dropdown-item">404 Page</a>
                             </div>
                         </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
                     </div>
                     <a href="" class="btn btn-dark py-2 px-4 d-none d-lg-inline-block">Shop Now</a>
                 </div>
@@ -96,65 +97,63 @@
     <!-- Hero End -->
 
 
-    <!-- Feature Start -->
-    <div class="container-fluid py-5">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-4 wow fadeIn" data-wow-delay="0.1s">
-                    <div class="feature-item position-relative bg-primary text-center p-3">
-                        <div class="border py-5 px-3">
-                            <i class="fa fa-leaf fa-3x text-dark mb-4"></i>
-                            <h5 class="text-white mb-0">100% Natural</h5>
+        <!-- Feature Start -->
+        <div class="container-fluid py-5">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-lg-4 wow fadeIn" data-wow-delay="0.1s">
+                        <div class="feature-item position-relative bg-primary text-center p-3">
+                            <div class="border py-5 px-3">
+                                <!-- <i class="fa fa-leaf fa-3x text-dark mb-4"></i> -->
+                                <h2 class="text-white mb-0">Glow with Nature's Best</h2>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 wow fadeIn" data-wow-delay="0.3s">
-                    <div class="feature-item position-relative bg-primary text-center p-3">
-                        <div class="border py-5 px-3">
-                            <i class="fa fa-tint-slash fa-3x text-dark mb-4"></i>
-                            <h5 class="text-white mb-0">Anti Hair Fall</h5>
+                    <div class="col-lg-4 wow fadeIn" data-wow-delay="0.3s">
+                        <div class="feature-item position-relative bg-primary text-center p-3">
+                            <div class="border py-5 px-3">
+                                <!-- <i class="fa fa-tint-slash fa-3x text-dark mb-4"></i> -->
+                                <h2 class="text-white mb-0">Radiance in Every Drop</h2>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 wow fadeIn" data-wow-delay="0.5s">
-                    <div class="feature-item position-relative bg-primary text-center p-3">
-                        <div class="border py-5 px-3">
-                            <i class="fa fa-times fa-3x text-dark mb-4"></i>
-                            <h5 class="text-white mb-0">Hypoallergenic</h5>
+                    <div class="col-lg-4 wow fadeIn" data-wow-delay="0.5s">
+                        <div class="feature-item position-relative bg-primary text-center p-3">
+                            <div class="border py-5 px-3">
+                                <!-- <i class="fa fa-times fa-3x text-dark mb-4"></i> -->
+                                <h2 class="text-white mb-0">Elevate Your Daily Rituals</h2>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Feature End -->
+        <!-- Feature End -->
 
 
-    <!-- About Start -->
-    <div class="container-fluid py-5">
-        <div class="container">
-            <div class="row g-5 align-items-center">
-                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
-                    <img class="img-fluid animated pulse infinite" src="img/shampoo-1.png">
-                </div>
-                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                    <h1 class="text-primary mb-4">Healthy Hair <span class="fw-light text-dark">Is A Symbol Of Our
-                            Beauty</span></h1>
-                    <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aliquet, erat non
-                        malesuada consequat, nibh erat tempus risus, vitae porttitor purus nisl vitae purus. Praesent
-                        tristique odio ut rutrum pellentesque. Fusce eget molestie est, at rutrum est.</p>
-                    <p class="mb-4">Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no
-                        labore lorem sit. Sanctus clita duo justo et tempor.</p>
-                    <a class="btn btn-primary py-2 px-4" href="">Shop Now</a>
-                </div>
+ <!-- About Start -->
+ <div class="container-fluid py-5">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                <img class="img-fluid animated pulse infinite" src="{% static 'img/natural_glow.png' %}">
+            </div>
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                <h1 class="text-primary mb-4">Aurora <span class="fw-light text-dark">Awaken Your 
+                    Natural Glow</span></h1>
+                <p class="mb-4">
+                    Aurora was founded to unite beauty, health, and technology. Inspired by the beauty of dawn, we focus on both skincare and skin health. Alongside offering premium beauty products made from natural ingredients, Aurora also helps individuals detect and prevent skin cancer with advanced AI-driven technology. Our mission is to enhance your natural radiance while empowering you with tools for healthier skin. Committed to quality, care, and responsibility, our products are gentle and effective, while our skin cancer prediction platform provides accessible, accurate insights for proactive prevention. At Aurora, we believe that beauty goes beyond appearance—it's about your health, too.</p>
+                <p class="mb-4">Whether you're looking to elevate your skincare routine or safeguard your skin's health, Aurora is here for you. With us, beauty meets technology to create a brighter, healthier future.</p>
+                <!-- <a class="btn btn-primary py-2 px-4" href="">Shop Now</a> -->
             </div>
         </div>
     </div>
-    <!-- About End -->
+</div>
+<!-- About End -->
 
 
     <!-- Newsletter Start -->
-    <div class="container-fluid newsletter bg-primary py-5 my-5">
+    <!-- <div class="container-fluid newsletter bg-primary py-5 my-5">
         <div class="container py-5">
             <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
                 <h1 class="text-white mb-3"><span class="fw-light text-dark">Let's Subscribe</span> The Newsletter</h1>
@@ -171,74 +170,70 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Newsletter End -->
 
-
-    <!-- Footer Start -->
-    <div class="container-fluid bg-white footer">
-        <div class="container py-5">
-            <div class="row g-5">
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
-                    <a href="index.html" class="d-inline-block mb-3">
-                        <h1 class="text-primary">Hairnic</h1>
-                    </a>
-                    <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aliquet, erat non
-                        malesuada consequat, nibh erat tempus risus, vitae porttitor purus nisl vitae purus.</p>
-                </div>
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
-                    <h5 class="mb-4">Get In Touch</h5>
-                    <p><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-                    <p><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                    <p><i class="fa fa-envelope me-3"></i>info@example.com</p>
-                    <div class="d-flex pt-2">
-                        <a class="btn btn-square btn-outline-primary me-1" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-square btn-outline-primary me-1" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-square btn-outline-primary me-1" href=""><i class="fab fa-instagram"></i></a>
-                        <a class="btn btn-square btn-outline-primary me-1" href=""><i
-                                class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
-                    <h5 class="mb-4">Our Products</h5>
-                    <a class="btn btn-link" href="">Hair Shining Shampoo</a>
-                    <a class="btn btn-link" href="">Anti-dandruff Shampoo</a>
-                    <a class="btn btn-link" href="">Anti Hair Fall Shampoo</a>
-                    <a class="btn btn-link" href="">Hair Growing Shampoo</a>
-                    <a class="btn btn-link" href="">Anti smell Shampoo</a>
-                </div>
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
-                    <h5 class="mb-4">Popular Link</h5>
-                    <a class="btn btn-link" href="">About Us</a>
-                    <a class="btn btn-link" href="">Contact Us</a>
-                    <a class="btn btn-link" href="">Privacy Policy</a>
-                    <a class="btn btn-link" href="">Terms & Condition</a>
-                    <a class="btn btn-link" href="">Career</a>
+<!-- Footer Start -->
+<div class="container-fluid bg-white footer">
+    <div class="container py-5">
+        <div class="row g-5">
+            <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
+                <a href="{% url 'index' %}" class="d-inline-block mb-3">
+                    <h1 class="text-primary">Aurora</h1>
+                </a>
+                <p class="mb-0">With us, beauty meets technology to create a brighter, healthier future.</p>
+            </div>
+            <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
+                <h5 class="mb-4">Get In Touch</h5>
+                <p><i class="fa fa-map-marker-alt me-3"></i>Aurora, 123 Harmony Lane, Rosewood Gardens, Bandra West, Mumbai, Maharashtra, India 400050</p>
+                <p><i class="fa fa-phone-alt me-3"></i>+91 9876543210</p>
+                <p><i class="fa fa-envelope me-3"></i>contact@aurorabeauty.in</p>
+                <div class="d-flex pt-2">
+                    <a class="btn btn-square btn-outline-primary me-1" href="https://x.com/i/flow/login?input_flow_data=%7B%22requested_variant%22%3A%22eyJteCI6IjIifQ%3D%3D%22%7D"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-square btn-outline-primary me-1" href="https://www.facebook.com/login/"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-square btn-outline-primary me-1" href="https://www.instagram.com/aurorabeautylv/"><i class="fab fa-instagram"></i></a>
+                    <a class="btn btn-square btn-outline-primary me-1" href="https://www.linkedin.com/"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
-        </div>
-        <div class="container wow fadeIn" data-wow-delay="0.1s">
-            <div class="copyright">
-                <div class="row">
-                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved.
-
-                        <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                        Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a> Distributed by <a href="https://themewagon.com">ThemeWagon</a>ss
-                    </div>
-                    <div class="col-md-6 text-center text-md-end">
-                        <div class="footer-menu">
-                            <a href="">Home</a>
-                            <a href="">Cookies</a>
-                            <a href="">Help</a>
-                            <a href="">FAQs</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
+                <h5 class="mb-4">Our Products</h5>
+                <a class="btn btn-link" href="{% url 'product' %}">Body</a>
+                <a class="btn btn-link" href="{% url 'product' %}">Face</a>
+                <a class="btn btn-link" href="{% url 'product' %}">Lip</a>
+                <a class="btn btn-link" href="{% url 'product' %}">Hair</a>
+                
+            </div>
+            <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
+                <h5 class="mb-4">Popular Link</h5>
+                <a class="btn btn-link" href="{% url 'about' %}">About Us</a>
+                <a class="btn btn-link" href="{% url 'contact' %}">Contact Us</a>
+                <a class="btn btn-link" href="{% url 'feature' %}">Benefits</a>
+                <a class="btn btn-link" href="{% url 'blog' %}">Blog</a>
+                <a class="btn btn-link" href="{% url 'testimonial' %}">Testimonial</a>
             </div>
         </div>
     </div>
-    <!-- Footer End -->
+    <div class="container wow fadeIn" data-wow-delay="0.1s">
+        <div class="copyright">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    &copy; <a class="border-bottom">Aurora</a>
+
+                    
+                <!-- <div class="col-md-6 text-center text-md-end">
+                    <div class="footer-menu">
+                        <a href="">Home</a>
+                        <a href="">Cookies</a>
+                        <a href="">Help</a>
+                        <a href="">FAQs</a>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer End -->
+
 
 
     <!-- Back to Top -->
@@ -248,13 +243,13 @@
     <!-- JavaScript Libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 </body>
 
 </html>
