@@ -178,7 +178,7 @@ img.animated.pulse {
 }
 
 
-/*** Deal ***/
+/* ** Deal **
 .deal {
     position: relative;
     background: url(../img/bg.png) center center no-repeat;
@@ -207,7 +207,7 @@ img.animated.pulse {
     font-style: italic;
     font-weight: 200;
     text-transform: capitalize;
-}
+} */
 
 
 /*** How To Use ***/
