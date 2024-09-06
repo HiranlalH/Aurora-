@@ -167,7 +167,7 @@ img.animated.pulse {
     height: 100%;
     top: 0;
     left: 0;
-    background: rgba(255, 255, 255, .1);
+    background: rgba(4, 23, 86, 0.201);
     clip-path: polygon(66% 0, 100% 0, 100% 100%, 33% 100%);
 }
 
@@ -245,7 +245,7 @@ img.animated.pulse {
 
 .product-item:hover {
     border-width: 0 !important;
-    box-shadow: 0 0 35px rgba(144, 188, 121, .25);
+    box-shadow: 0 0 35px rgba(90, 217, 22, 0.25);
 }
 
 .product-item:hover a.btn {
@@ -319,7 +319,7 @@ img.animated.pulse {
 
 .blog-item:hover {
     border-width: 0 !important;
-    box-shadow: 0 0 35px rgba(144, 188, 121, .25);
+    box-shadow: 0 0 35px rgba(90, 217, 22, 0.25);
 }
 
 .blog-item:hover a.btn {
