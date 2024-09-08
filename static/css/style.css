@@ -257,7 +257,7 @@ img.animated.pulse {
 /*** Testimonial ***/
 .testimonial {
     position: relative;
-    background: url(../img/bg.png) center center no-repeat;
+    background: url(../img/bg.png)  center no-repeat;
     background-size: cover;
 }
 
