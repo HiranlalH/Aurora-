@@ -7,6 +7,13 @@ def index(request):
 def error(request):
     return render(request,"error.html")
 
+def userlogin(request):
+    return render(request,"userlogin.html")
+
+def userreg(request):
+    return render(request,"userreg.html")
+
+
 def about(request):
     return render(request,"about.html")
     
