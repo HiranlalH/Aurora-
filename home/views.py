@@ -26,8 +26,8 @@ def contact(request):
 def feature(request):
     return render(request,"feature.html")
 
-def how_to_use(request):
-    return render(request,"how_to_use.html")
+def Prediction(request):
+    return render(request,"Prediction.html")
 
 def product(request):
     return render(request,"product.html")

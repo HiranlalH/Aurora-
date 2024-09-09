@@ -45,47 +45,49 @@
     <!-- Spinner End -->
 
 
-    <!-- Navbar Start -->
-    <div class="container-fluid sticky-top">
-        <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light p-0">
-                <a href="{% url 'index' %}" class="navbar-brand">
-                    <h2 class="text-white">Aurora</h2>
-                </a>
-                <button type="button" class="navbar-toggler ms-auto me-0" data-bs-toggle="collapse"
-                    data-bs-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <div class="navbar-nav ms-auto">
-                        <a href="{% url 'index' %}" class="nav-item nav-link">Home</a>
-                        <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
-                        <a href="{% url 'product' %}" class="nav-item nav-link">Products</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu bg-light mt-2">
-                                <a href="{% url 'feature' %}" class="dropdown-item">Features</a>
-                                <a href="{% url 'how_to_use' %}" class="dropdown-item">How To Use</a>
-                                <a href="{% url 'testimonial' %}" class="dropdown-item">Testimonial</a>
-                                <a href="{% url 'blog' %}" class="dropdown-item active">Blog Articles</a>
-                                <a href="{% url 'error' %}" class="dropdown-item">Error Page</a>
-                            </div>
+    
+<!-- Navbar Start -->
+<div class="container-fluid sticky-top">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light p-0">
+            <a href="{% url 'index' %}" class="navbar-brand">
+                <h2 class="text-white">Aurora</h2>
+            </a>
+            <button type="button" class="navbar-toggler ms-auto me-0" data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto">
+                    <a href="{% url 'index' %}" class="nav-item nav-link">Home</a>
+                    <a href="{% url 'about' %}" class="nav-item nav-link active">About</a>
+                    <a href="{% url 'product' %}" class="nav-item nav-link">Products</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                        <div class="dropdown-menu bg-light mt-2">
+                            <a href="{% url 'feature' %}" class="dropdown-item">Features</a>
+                            <a href="{% url 'Prediction' %}" class="dropdown-item">Prediction</a>
+                            <a href="{% url 'testimonial' %}" class="dropdown-item">Testimonial</a>
+                            <a href="{% url 'blog' %}" class="dropdown-item">Blog Articles</a>
+                            <a href="{% url 'error' %}" class="dropdown-item">Error Page</a>
                         </div>
-                        <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
                     </div>
+                    <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Login</a>
                         <div class="dropdown-menu bg-light mt-2">
-                            <a href="{% url 'userlogin' %}" class="dropdown-item">Features</a>
-                            <a href="{% url 'userreg' %}" class="dropdown-item">How To Use</a>
+                            <a href="{% url 'userlogin' %}" class="dropdown-item">Login</a>
+                            <a href="{% url 'userreg' %}" class="dropdown-item">Registration</a>
                         </div>
                     </div>
                 </div>
-                </div>
-            </nav>
-        </div>
+                <a href="{% url 'product' %}" class="btn btn-dark py-2 px-4 d-none d-lg-inline-block">Shop Now</a>
+            </div>
+        </nav>
     </div>
-    <!-- Navbar End -->
+</div>
+
+<!-- Navbar End --> 
 
 
     <!-- Hero Start -->
