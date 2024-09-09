@@ -32,6 +32,126 @@
 
     <!-- Template Stylesheet -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <style>
+        
+/* Glassmorphism Effect on Forms */
+.form-box {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    text-align: center;
+    width: 350px;
+}
+
+.form-box h2 {
+    color: #fff;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.input-box {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #fff;
+    outline: none;
+    color: #fff;
+    font-size: 16px;
+}
+
+.input-box label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #fff;
+    font-size: 16px;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.input-box input:focus ~ label,
+.input-box input:valid ~ label {
+    top: -18px;
+    left: 0;
+    color: #06f998;
+    font-size: 12px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #06f998;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color:#04652b;
+}
+
+/* Specific Styles for Login */
+.login-box .options {
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    font-size: 12px;
+    margin-bottom: 30px;
+}
+
+.login-box .options a {
+    color: #06f998;
+    text-decoration: none;
+}
+
+.login-box .options a:hover {
+    text-decoration: underline;
+}
+
+.login-box .register {
+    margin-top: 20px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.login-box .register a {
+    color: #06f998;
+    text-decoration: none;
+}
+
+.login-box .register a:hover {
+    text-decoration: underline;
+}
+
+/* Specific Styles for Registration */
+.register-box .login {
+    margin-top: 20px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.register-box .login a {
+    color: #06f998;
+    text-decoration: none;
+}
+
+.register-box .login a:hover {
+    text-decoration: underline;
+}
+
+    </style>
 </head>
 
 <body>
@@ -44,7 +164,7 @@
     </div>
     <!-- Spinner End -->
 
-
+   
     <!-- Navbar Start -->
     <div class="container-fluid sticky-top">
         <div class="container">
@@ -59,127 +179,60 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
                         <a href="{% url 'index' %}" class="nav-item nav-link">Home</a>
-                        <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
+                        <a href="{% url 'about' %}" class="nav-item nav-link active">About</a>
                         <a href="{% url 'product' %}" class="nav-item nav-link">Products</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Pages</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu bg-light mt-2">
                                 <a href="{% url 'feature' %}" class="dropdown-item">Features</a>
                                 <a href="{% url 'how_to_use' %}" class="dropdown-item">How To Use</a>
                                 <a href="{% url 'testimonial' %}" class="dropdown-item">Testimonial</a>
-                                <a href="{% url 'blog' %}" class="dropdown-item active">Blog Articles</a>
+                                <a href="{% url 'blog' %}" class="dropdown-item">Blog Articles</a>
                                 <a href="{% url 'error' %}" class="dropdown-item">Error Page</a>
                             </div>
                         </div>
                         <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Login</a>
-                        <div class="dropdown-menu bg-light mt-2">
-                            <a href="{% url 'userlogin' %}" class="dropdown-item">Features</a>
-                            <a href="{% url 'userreg' %}" class="dropdown-item">How To Use</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Login</a>
+                            <div class="dropdown-menu bg-light mt-2">
+                                <a href="{% url 'userlogin' %}" class="dropdown-item">Login</a>
+                                <a href="{% url 'userreg' %}" class="dropdown-item">Registration</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <a href="{% url 'product' %}" class="btn btn-dark py-2 px-4 d-none d-lg-inline-block">Shop Now</a>
                 </div>
             </nav>
         </div>
     </div>
-    <!-- Navbar End -->
-
-
-    <!-- Hero Start -->
     <div class="container-fluid bg-primary hero-header mb-5">
-        <div class="container text-center">
-            <h1 class="display-4 text-white mb-3 animated slideInDown">About Us</h1>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb justify-content-center mb-0 animated slideInDown">
-                    <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
-                    <li class="breadcrumb-item text-white active" aria-current="page">About</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
-    <!-- Hero End -->
-
-
-        <!-- Feature Start -->
-        <div class="container-fluid py-5">
-            <div class="container">
-                <div class="row g-4">
-                    <div class="col-lg-4 wow fadeIn" data-wow-delay="0.1s">
-                        <div class="feature-item position-relative bg-primary text-center p-3">
-                            <div class="border py-5 px-3">
-                                <!-- <i class="fa fa-leaf fa-3x text-dark mb-4"></i> -->
-                                <h2 class="text-white mb-0">Glow with Nature's Best</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 wow fadeIn" data-wow-delay="0.3s">
-                        <div class="feature-item position-relative bg-primary text-center p-3">
-                            <div class="border py-5 px-3">
-                                <!-- <i class="fa fa-tint-slash fa-3x text-dark mb-4"></i> -->
-                                <h2 class="text-white mb-0">Radiance in Every Drop</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 wow fadeIn" data-wow-delay="0.5s">
-                        <div class="feature-item position-relative bg-primary text-center p-3">
-                            <div class="border py-5 px-3">
-                                <!-- <i class="fa fa-times fa-3x text-dark mb-4"></i> -->
-                                <h2 class="text-white mb-0">Elevate Your Daily Rituals</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- Navbar End --> 
+<center>
+<!-- Login Form -->
+<div class="container">
+    <div class="form-box login-box">
+        <h2>Login</h2>
+        <form action="#">
+            <div class="input-box">
+                <input type="email" required>
+                <label for="email">Enter your email</label>
             </div>
-        </div>
-        <!-- Feature End -->
-
-
- <!-- About Start -->
- <div class="container-fluid py-5">
-    <div class="container">
-        <div class="row g-5 align-items-center">
-            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
-                <img class="img-fluid animated pulse infinite" src="{% static 'img/natural_glow.png' %}">
+            <div class="input-box">
+                <input type="password" required>
+                <label for="password">Enter your password</label>
             </div>
-            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                <h1 class="text-primary mb-4">Aurora <span class="fw-light text-dark">Awaken Your 
-                    Natural Glow</span></h1>
-                <p class="mb-4">
-                    Aurora was founded to unite beauty, health, and technology. Inspired by the beauty of dawn, we focus on both skincare and skin health. Alongside offering premium beauty products made from natural ingredients, Aurora also helps individuals detect and prevent skin cancer with advanced AI-driven technology. Our mission is to enhance your natural radiance while empowering you with tools for healthier skin. Committed to quality, care, and responsibility, our products are gentle and effective, while our skin cancer prediction platform provides accessible, accurate insights for proactive prevention. At Aurora, we believe that beauty goes beyond appearance—it's about your health, too.</p>
-                <p class="mb-4">Whether you're looking to elevate your skincare routine or safeguard your skin's health, Aurora is here for you. With us, beauty meets technology to create a brighter, healthier future.</p>
-                <!-- <a class="btn btn-primary py-2 px-4" href="">Shop Now</a> -->
+            <div class="options">
+                <div><input type="checkbox"> Remember me</div>
+                <a href="#">Forgot password?</a>
             </div>
-        </div>
+            <button type="submit">Log In</button>
+            <div class="register">
+                Don't have an account? <a href="register.html">Register</a>
+            </div>
+        </form>
     </div>
 </div>
-<!-- About End -->
-
-
-    <!-- Newsletter Start -->
-    <!-- <div class="container-fluid newsletter bg-primary py-5 my-5">
-        <div class="container py-5">
-            <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
-                <h1 class="text-white mb-3"><span class="fw-light text-dark">Let's Subscribe</span> The Newsletter</h1>
-                <p class="text-white mb-4">Subscribe now to get 30% discount on any of our products</p>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-md-7 wow fadeIn" data-wow-delay="0.5s">
-                    <div class="position-relative w-100 mt-3 mb-2">
-                        <input class="form-control w-100 py-4 ps-4 pe-5" type="text" placeholder="Enter Your Email"
-                            style="height: 48px;">
-                        <button type="button" class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2"><i
-                                class="fa fa-paper-plane text-white fs-4"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <!-- Newsletter End -->
-
+</center><br> <br> <br> <br> <br> <br> <br> <br> <br>
 <!-- Footer Start -->
 <div class="container-fluid bg-white footer">
     <div class="container py-5">
@@ -238,6 +291,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 <!-- Footer End -->
 
