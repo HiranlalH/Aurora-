@@ -66,3 +66,6 @@ def testimonial(request):
 
 def feedback(request):
     return render(request,"feedback.html")
+
+def payment(request):
+    return render(request,"payment.html")
