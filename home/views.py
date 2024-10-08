@@ -63,3 +63,6 @@ def product(request):
 
 def testimonial(request):
     return render(request,"testimonial.html")
+
+def feedback(request):
+    return render(request,"feedback.html")
