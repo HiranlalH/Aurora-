@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Aurora - Prediction</title>
+    <title>Aurora - Contact</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -43,7 +43,6 @@
         </div>
     </div>
     <!-- Spinner End -->
-
 
 <!-- Navbar Start -->
 <div class="container-fluid sticky-top">
@@ -91,99 +90,48 @@
 
 <!-- Navbar End --> 
 
+
     <!-- Hero Start -->
     <div class="container-fluid bg-primary hero-header mb-5">
         <div class="container text-center">
-            <h1 class="display-4 text-white mb-3 animated slideInDown">Prediction</h1>
+            <h1 class="display-4 text-white mb-3 animated slideInDown">Payment</h1>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb justify-content-center mb-0 animated slideInDown">
                     <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
                     <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
-                    <li class="breadcrumb-item text-white active" aria-current="page">Prediction</li>
+                    <li class="breadcrumb-item text-white active" aria-current="page">Payement</li>
                 </ol>
             </nav>
         </div>
     </div>
     <!-- Hero End -->
 
-
-    <!-- Feature Start -->
-    <div class="container-fluid py-5">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-4 wow fadeIn" data-wow-delay="0.1s">
-                    <div class="feature-item position-relative bg-primary text-center p-3">
-                        <div class="border py-5 px-3">
-                            <i class="fa fa-leaf fa-3x text-dark mb-4"></i>
-                            <h5 class="text-white mb-0">Glow with Nature's Best</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 wow fadeIn" data-wow-delay="0.3s">
-                    <div class="feature-item position-relative bg-primary text-center p-3">
-                        <div class="border py-5 px-3">
-                            <i class="fa fa-tint-slash fa-3x text-dark mb-4"></i>
-                            <h5 class="text-white mb-0">Radiance in Every Drop</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 wow fadeIn" data-wow-delay="0.5s">
-                    <div class="feature-item position-relative bg-primary text-center p-3">
-                        <div class="border py-5 px-3">
-                            <i class="fa fa-times fa-3x text-dark mb-4"></i>
-                            <h5 class="text-white mb-0">Elevate Your Daily Rituals</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    
+    <div class="container">
+        <h2>QR Code Payment</h2>
+        <p class="payment-info">Please scan the QR code below to complete your payment.</p>
+        
+        <!-- QR Code Image (Placeholder, should be dynamically generated) -->
+        <img src="{% static 'img/QR.jpg' %}" alt="QR Code"  class="qr-code">
+        
+        <p class="amount">Amount: $50.00</p>
+        
+        <p class="instructions">Open your mobile payment app and scan the QR code to make the payment.</p>
+        
+        <button class="pay-btn" onclick="confirmPayment()">Confirm Payment</button>
     </div>
-    <!-- Feature End -->
+    
 
-
-      <!-- Prediction Start -->
-      <div class="container-fluid Prediction bg-primary my-5 py-5">
-        <div class="container text-white py-5">
-            <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
-                <h1 class="text-white mb-3"><span class="fw-light text-dark">Skin Cancer Prediction</span> Using Aurora</h1>
-                <p class="mb-5">At Aurora, we combine beauty with health by offering our AI-powered Skin Cancer Prediction Tool. Early detection is key to effective treatment, and our advanced technology helps you monitor your skin’s health with ease.</p>
-            </div>
-            <!-- <div class="col-lg-4 wow fadeIn" data-wow-delay="0.1s"></div>
-                <img class="img-fluid animated pulse infinite" src="{% static 'img/skincancer.jpg' %}">
-            </div> -->
-            <div class="row g-5">
-                <div class="col-lg-4 text-center wow fadeIn" data-wow-delay="0.1s">
-                    
-                    <h5 class="text-white">Why It Matters</h5>
-                    <hr class="w-25 bg-light my-2 mx-auto">
-                    <span>Early detection of skin cancer can lead to better treatment outcomes. Our tool helps you identify potential risks before they become serious.</span>
-                </div>
-                <div class="col-lg-4 text-center wow fadeIn" data-wow-delay="0.3s">
-                    
-                    <h5 class="text-white">How It Works</h5>
-                    <hr class="w-25 bg-light my-2 mx-auto">
-                    <span>Using AI technology, our tool analyzes your skin images and provides instant insights. For any flagged concerns, we recommend consulting a dermatologist.</span>
-                </div>
-                <div class="col-lg-4 text-center wow fadeIn" data-wow-delay="0.5s">
-                    
-                    <h5 class="text-white">Beauty and Health Combined</h5>
-                    <hr class="w-25 bg-light my-2 mx-auto">
-                    <span>Aurora integrates premium beauty products with advanced skin health technology, ensuring a holistic approach to your well-being.</span>
-                </div>
-                <!-- <div class="col-lg-4 text-center wow fadeIn" data-wow-delay="0.5s"></div>
-                    
-                    <h5 class="text-white">Start Now</h5>
-                    <hr class="w-25 bg-light my-2 mx-auto">
-                    <span>Protect your skin with Aurora’s Skin Cancer Prediction Tool and take charge of your health today</span>
-                </div> -->
-            </div>
-        </div>
-    </div>
-    <!-- Prediction End -->
-
-
-    <!-- Footer Start -->
-   <div class="container-fluid bg-white footer">
+    
+    <script>
+        function confirmPayment() {
+            alert("Payment confirmed! Thank you.");
+            // Further logic for payment confirmation can be added here.
+        }
+    </script>
+    
+ <!-- Footer Start -->
+ <div class="container-fluid bg-white footer">
     <div class="container py-5">
         <div class="row g-5">
             <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
@@ -244,21 +192,22 @@
 <!-- Footer End -->
 
 
+
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 
-    <!-- JavaScript Libraries -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{% static 'lib/wow/wow.min.js' %}"></script>
-    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
-    <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
-    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
-
-    <!-- Template Javascript -->
-    <script src="{% static 'js/main.js' %}"></script>
-</body>
-
-</html>
+        <!-- JavaScript Libraries -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+        <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+        <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+        <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+    
+        <!-- Template Javascript -->
+        <script src="{% static 'js/main.js' %}"></script>
+    </body>
+    
+    </html>
 
