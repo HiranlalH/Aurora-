@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container py-5">
+        <h1 class="text-center">Shopping Cart</h1>
+        <div id="cartContent"></div>
+        <div class="text-center mt-4">
+            <button class="btn btn-danger" id="clearCart">Clear Cart</button>
+            <button class="btn btn-primary" id="checkout" style="display: none;">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <script>
+        // Get cart items from local storage
+        function getCartItems() {
+            return JSON.parse(localStorage.getItem("cartItems")) || [];
+        }
+
+        // Display cart items in the table
+        function displayCartItems() {
+            const cartItems = getCartItems();
+            const cartContentDiv = document.getElementById("cartContent");
+            const checkoutBtn = document.getElementById("checkout");
+
+            if (cartItems.length === 0) {
+                cartContentDiv.innerHTML = "<p>Your cart is empty.</p>";
+                checkoutBtn.style.display = "none";
+                return;
+            }
+
+            let totalAmount = 0;
+            let cartHTML = '<table class="table table-bordered"><thead><tr><th>Product</th><th>Price</th><th>Quantity</th><th>Total</th></tr></thead><tbody>';
+
+            cartItems.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                totalAmount += itemTotal;
+                cartHTML += `<tr>
+                    <td>${item.name}</td>
+                    <td>Rs. ${item.price}</td>
+                    <td>${item.quantity}</td>
+                    <td>Rs. ${itemTotal}</td>
+                </tr>`;
+            });
+
+            cartHTML += `</tbody></table>
+                <h4 class="text-right">Total Amount: Rs. ${totalAmount}</h4>`;
+
+            cartContentDiv.innerHTML = cartHTML;
+            checkoutBtn.style.display = "inline-block";  // Show the checkout button if cart is not empty
+        }
+
+        // Clear cart and update UI
+        document.getElementById("clearCart").addEventListener("click", function() {
+            localStorage.removeItem("cartItems");
+            displayCartItems();
+        });
+
+        // Redirect to checkout page
+        document.getElementById("checkout").addEventListener("click", function() {
+            window.location.href = "{% url 'checkout' %}";
+        });
+
+        // Initial call to display cart items
+        displayCartItems();
+    </script>
+</body>
+</html>

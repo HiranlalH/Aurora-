@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container py-5">
+        <h1 class="text-center">Checkout</h1>
+        <div id="checkoutContent"></div>
+        <div class="text-center mt-4">
+            <button class="btn btn-success" id="proceedToPayment">Proceed to Payment</button>
+        </div>
+    </div>
+
+    <script>
+        function getCartItems() {
+            return JSON.parse(localStorage.getItem("cartItems")) || [];
+        }
+
+        function displayCheckoutItems() {
+            const cartItems = getCartItems();
+            const checkoutContentDiv = document.getElementById("checkoutContent");
+
+            if (cartItems.length === 0) {
+                checkoutContentDiv.innerHTML = "<p>Your cart is empty.</p>";
+                return;
+            }
+
+            let totalAmount = 0;
+            let checkoutHTML = '<table class="table table-bordered"><thead><tr><th>Product</th><th>Price</th><th>Quantity</th><th>Total</th></tr></thead><tbody>';
+
+            cartItems.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                totalAmount += itemTotal;
+                checkoutHTML += `<tr>
+                    <td>${item.name}</td>
+                    <td>Rs. ${item.price}</td>
+                    <td>${item.quantity}</td>
+                    <td>Rs. ${itemTotal}</td>
+                </tr>`;
+            });
+
+            checkoutHTML += `</tbody></table>
+                <h4 class="text-right">Total Amount: Rs. ${totalAmount}</h4>`;
+
+            checkoutContentDiv.innerHTML = checkoutHTML;
+        }
+
+        // Proceed to Payment
+        document.getElementById("proceedToPayment").addEventListener("click", function() {
+            const cartItems = getCartItems();
+            if (cartItems.length > 0) {
+                const totalAmount = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                localStorage.setItem("totalAmount", totalAmount); // Save total amount to localStorage
+                window.location.href = "{% url 'payment' %}"; // Redirect to the payment page
+            } else {
+                alert("Your cart is empty!");
+            }
+        });
+
+        // Display checkout items on page load
+        displayCheckoutItems();
+    </script>
+</body>
+</html>

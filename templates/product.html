@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Aurora- Products</title>
+    <title>Aurora - Blog</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -32,6 +32,84 @@
 
     <!-- Template Stylesheet -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
+<style>
+    /* Global styling */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f8f9fa;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+
+    /* Styling for product section */
+    .product-item {
+        position: relative;
+        background: #fff;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-item img {
+        width: 100%;
+        height: auto;
+        transition: transform 0.3s ease;
+    }
+
+    .product-item:hover img {
+        transform: scale(1.05);
+    }
+
+    .product-item h5 {
+        font-size: 1.25rem;
+        color: #ff6f61;
+    }
+
+    .product-item a {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #000;
+    }
+
+    .product-item a:hover {
+        color: #ff6f61;
+        text-decoration: none;
+    }
+
+    .product-item input {
+        border-radius: 5px;
+    }
+
+    /* Button styling */
+    .btn-primary {
+        background-color: #ff6f61;
+        border: none;
+    }
+
+    .btn-primary:hover {
+        background-color: #e55b50;
+    }
+
+    /* Responsive grid */
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 2rem;
+        }
+
+        .product-item h5 {
+            font-size: 1.1rem;
+        }
+
+        .product-item a {
+            font-size: 1rem;
+        }
+    }
+        
+</style>
+
 </head>
 
 <body>
@@ -70,7 +148,7 @@
                             <a href="{% url 'blog' %}" class="dropdown-item">Blog Articles</a>
                             <a href="{% url 'error' %}" class="dropdown-item">Error Page</a>
                             <a href="{% url 'feedback' %}" class="dropdown-item">feedback Page</a>
-                            <a href="{% url 'payment' %}" class="dropdown-item">Payment Page</a>
+                            
 
                         </div>
                     </div>
@@ -106,193 +184,158 @@
         </div>
     </div>
     <!-- Hero End -->
-
-
     <!-- Product Start -->
     <div class="container-fluid py-5">
         <div class="container">
-            <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
+            <div class="mx-auto text-center mb-5" style="max-width: 600px;">
                 <h1 class="text-primary mb-3"><span class="fw-light text-dark">Our</span> Products</h1>
-                <p class="mb-5">Illuminate your beauty with Aurora's curated collection. From nourishing skincare to revitalizing haircare, our products blend nature's finest ingredients to bring out your natural glow. Elevate your daily routine with the magic of dawn in every bottle.</p>
+                <p class="text-muted">Illuminate your beauty with Aurora's curated collection. From nourishing skincare to revitalizing haircare, our products blend nature's finest ingredients to bring out your natural glow.</p>
             </div>
             <div class="row g-4">
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
-                    <div class="product-item text-center border h-100 p-4">
-                        <img class="img-fluid mb-4" src="{% static 'img/body lotion.png' %}" alt="">
-                        <!-- <div class="mb-2">
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small>(99)</small>
-                        </div> -->
-                        <a href="" class="h6 d-inline-block mb-2">Body Lotion</a>
-                        <h5 class="text-primary mb-3">Rs. 500</h5>
-                        <a href="" class="btn btn-outline-primary px-3">Add To Cart</a>
+                <form id="productForm">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-3">
+                            <div class="product-item text-center border h-100 p-4 rounded">
+                                <img class="img-fluid mb-4" src="{% static 'img/body lotion.png' %}" alt="Body Lotion">
+                                <a href="#" class="h6 d-inline-block mb-2">Body Lotion</a>
+                                <h5 class="mb-3">Rs. 500</h5>
+                                <input type="number" min="0" value="0" id="bodyLotionQty" class="form-control mb-2" placeholder="Quantity">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="product-item text-center border h-100 p-4 rounded">
+                                <img class="img-fluid mb-4" src="{% static 'img/face cream.jpg' %}" alt="Face Cream">
+                                <a href="#" class="h6 d-inline-block mb-2">Face Cream</a>
+                                <h5 class="mb-3">Rs. 410</h5>
+                                <input type="number" min="0" value="0" id="faceCreamQty" class="form-control mb-2" placeholder="Quantity">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="product-item text-center border h-100 p-4 rounded">
+                                <img class="img-fluid mb-4" src="{% static 'img/facewash.jpg' %}" alt="Face Wash">
+                                <a href="#" class="h6 d-inline-block mb-2">Face Wash</a>
+                                <h5 class="mb-3">Rs. 210</h5>
+                                <input type="number" min="0" value="0" id="facewashQty" class="form-control mb-2" placeholder="Quantity">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="product-item text-center border h-100 p-4 rounded">
+                                <img class="img-fluid mb-4" src="{% static 'img/cleanser.jpg' %}" alt="Cleanser">
+                                <a href="#" class="h6 d-inline-block mb-2">Cleanser</a>
+                                <h5 class="mb-3">Rs. 200</h5>
+                                <input type="number" min="0" value="0" id="cleanserQty" class="form-control mb-2" placeholder="Quantity">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="product-item text-center border h-100 p-4 rounded">
+                                <img class="img-fluid mb-4" src="{% static 'img/face serum.jpg' %}" alt="Face Serum">
+                                <a href="#" class="h6 d-inline-block mb-2">Face Serum</a>
+                                <h5 class="mb-3">Rs. 380</h5>
+                                <input type="number" min="0" value="0" id="faceSerumQty" class="form-control mb-2" placeholder="Quantity">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="product-item text-center border h-100 p-4 rounded">
+                                <img class="img-fluid mb-4" src="{% static 'img/sunscreen.jpg' %}" alt="Sunscreen">
+                                <a href="#" class="h6 d-inline-block mb-2">Sunscreen</a>
+                                <h5 class="mb-3">Rs. 300</h5>
+                                <input type="number" min="0" value="0" id="suncreenQty" class="form-control mb-2" placeholder="Quantity">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="product-item text-center border h-100 p-4 rounded">
+                                <img class="img-fluid mb-4" src="{% static 'img/lip balm.png' %}" alt="Lip Balm">
+                                <a href="#" class="h6 d-inline-block mb-2">Lip Balm</a>
+                                <h5 class="mb-3">Rs. 190</h5>
+                                <input type="number" min="0" value="0" id="LipBalmQty" class="form-control mb-2" placeholder="Quantity">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="product-item text-center border h-100 p-4 rounded">
+                                <img class="img-fluid mb-4" src="{% static 'img/Shampoo.jpg' %}" alt="Shampoo">
+                                <a href="#" class="h6 d-inline-block mb-2">Shampoo</a>
+                                <h5 class="mb-3">Rs. 874</h5>
+                                <input type="number" min="0" value="0" id="shampooQty" class="form-control mb-2" placeholder="Quantity">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="product-item text-center border h-100 p-4 rounded">
+                                <img class="img-fluid mb-4" src="{% static 'img/conditioner.jpg' %}" alt="Conditioner">
+                                <a href="#" class="h6 d-inline-block mb-2">Conditioner</a>
+                                <h5 class="mb-3">Rs. 625</h5>
+                                <input type="number" min="0" value="0" id="conditionerQty" class="form-control mb-2" placeholder="Quantity">
+                            </div>
+                        </div>
+                        <div class="col-12 text-center mt-4">
+                            <button type="submit" class="btn btn-primary py-2 px-4">Add To Cart</button>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
-                    <div class="product-item text-center border h-100 p-4">
-                        <img class="img-fluid mb-4" src="{% static 'img/face cream.jpg' %}" alt="">
-                        <!-- <div class="mb-2">
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small>(99)</small>
-                        </div> -->
-                        <a href="" class="h6 d-inline-block mb-2">Face Cream</a>
-                        <h5 class="text-primary mb-3">$99.99</h5>
-                        <a href="" class="btn btn-outline-primary px-3">Add To Cart</a>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
-                    <div class="product-item text-center border h-100 p-4">
-                        <img class="img-fluid mb-4" src="{% static 'img/facewash.jpg' %}" alt="">
-                        <!-- <div class="mb-2">
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small>(99)</small>
-                        </div> -->
-                        <a href="" class="h6 d-inline-block mb-2">Facewash</a>
-                        <h5 class="text-primary mb-3">Rs. 450</h5>
-                        <a href="" class="btn btn-outline-primary px-3">Add To Cart</a>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
-                    <div class="product-item text-center border h-100 p-4">
-                        <img class="img-fluid mb-4" src="{% static 'img/face serum.jpg' %}" alt="">
-                        <!-- <div class="mb-2">
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small>(99)</small>
-                        </div> -->
-                        <a href="" class="h6 d-inline-block mb-2">Face Serum</a>
-                        <h5 class="text-primary mb-3">Rs. 380</h5>
-                        <a href="" class="btn btn-outline-primary px-3">Add To Cart</a>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
-                    <div class="product-item text-center border h-100 p-4">
-                        <img class="img-fluid mb-4" src="{% static 'img/cleanser.jpg' %}" alt="">
-                        <!-- <div class="mb-2">
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small>(99)</small>
-                        </div> -->
-                        <a href="" class="h6 d-inline-block mb-2">Cleanser</a>
-                        <h5 class="text-primary mb-3">Rs. 200</h5>
-                        <a href="" class="btn btn-outline-primary px-3">Add To Cart</a>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
-                    <div class="product-item text-center border h-100 p-4">
-                        <img class="img-fluid mb-4" src="{% static 'img/sunscreen.jpg' %}" alt="">
-                        <!-- <div class="mb-2">
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small>(99)</small>
-                        </div> -->
-                        <a href="" class="h6 d-inline-block mb-2">Sunscreen</a>
-                        <h5 class="text-primary mb-3">Rs. 300</h5>
-                        <a href="" class="btn btn-outline-primary px-3">Add To Cart</a>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
-                    <div class="product-item text-center border h-100 p-4">
-                        <img class="img-fluid mb-4" src="{% static 'img/lip balm.png' %}" alt="">
-                        <!-- <div class="mb-2">
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small>(99)</small>
-                        </div> -->
-                        <a href="" class="h6 d-inline-block mb-2">Lip Balm</a>
-                        <h5 class="text-primary mb-3">Rs. 190</h5>
-                        <a href="" class="btn btn-outline-primary px-3">Add To Cart</a>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
-                    <div class="product-item text-center border h-100 p-4">
-                        <img class="img-fluid mb-4" src="{% static 'img/Shampoo.jpg' %}" alt="">
-                        <!-- <div class="mb-2">
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small>(99)</small>
-                        </div> -->
-                        <a href="" class="h6 d-inline-block mb-2">Shampoo</a>
-                        <h5 class="text-primary mb-3">Rs. 874</h5>
-                        <a href="" class="btn btn-outline-primary px-3">Add To Cart</a>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
-                    <div class="product-item text-center border h-100 p-4">
-                        <img class="img-fluid mb-4" src="{% static 'img/conditioner.jpg' %}" alt="">
-                        <!-- <div class="mb-2">
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small>(99)</small>
-                        </div> -->
-                        <a href="" class="h6 d-inline-block mb-2">Conditioner</a>
-                        <h5 class="text-primary mb-3">Rs. 625</h5>
-                        <a href="" class="btn btn-outline-primary px-3">Add To Cart</a>
-                    </div>
-                </div>
-                <!-- <div class="col-12 text-center">
-                    <a class="btn btn-primary py-2 px-4" href="">Load More Products</a>
-                </div> -->
+                </form>
             </div>
         </div>
     </div>
     <!-- Product End -->
 
+    <script>
+        // Function to get cart items from localStorage or return empty array
+        function getCartItems() {
+            return JSON.parse(localStorage.getItem("cartItems")) || [];
+        }
 
-    <!-- Newsletter Start -->
-    <div class="container-fluid newsletter bg-primary py-5 my-5">
-        <div class="container py-5">
-            <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
-                <h1 class="text-white mb-3"><span class="fw-light text-dark">Let's Subscribe</span> The Newsletter</h1>
-                <p class="text-white mb-4">Subscribe now to get 30% discount on any of our products</p>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-md-7 wow fadeIn" data-wow-delay="0.5s">
-                    <div class="position-relative w-100 mt-3 mb-2">
-                        <input class="form-control w-100 py-4 ps-4 pe-5" type="text" placeholder="Enter Your Email"
-                            style="height: 48px;">
-                        <button type="button" class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2"><i
-                                class="fa fa-paper-plane text-white fs-4"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Newsletter End -->
+        // Function to save cart items to localStorage
+        function saveCartItems(cartItems) {
+            localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        }
 
+        // Add event listener to the form submission
+        document.getElementById("productForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent page reload
 
-    <!-- Footer Start -->
-   <div class="container-fluid bg-white footer">
+            let cartItems = getCartItems(); // Get existing cart items
+
+            // Function to add or update product in the cart
+            const addOrUpdateCartItem = (name, price, quantity) => {
+                const itemIndex = cartItems.findIndex(item => item.name === name);
+                if (itemIndex > -1) {
+                    // Update quantity if product already in cart
+                    cartItems[itemIndex].quantity += quantity;
+                } else {
+                    // Add new item to cart
+                    cartItems.push({ name: name, price: price, quantity: quantity });
+                }
+            };
+
+            // Get the quantity entered for each product
+            const bodyLotionQty = parseInt(document.getElementById("bodyLotionQty").value);
+            const faceCreamQty = parseInt(document.getElementById("faceCreamQty").value);
+            const facewashQty = parseInt(document.getElementById("facewashQty").value);
+            const cleanserQty = parseInt(document.getElementById("cleanserQty").value);
+            const faceSerumQty = parseInt(document.getElementById("faceSerumQty").value);
+            const suncreenQty = parseInt(document.getElementById("suncreenQty").value);
+            const LipBalmQty = parseInt(document.getElementById("LipBalmQty").value);
+            const shampooQty = parseInt(document.getElementById("shampooQty").value);
+            const conditionerQty = parseInt(document.getElementById("conditionerQty").value);
+
+            // Add products to cart only if quantity is greater than 0
+            if (bodyLotionQty > 0) addOrUpdateCartItem("Body Lotion", 500, bodyLotionQty);
+            if (faceCreamQty > 0) addOrUpdateCartItem("Face Cream", 410, faceCreamQty);
+            if (facewashQty > 0) addOrUpdateCartItem("Facewash", 210, facewashQty);
+            if (cleanserQty > 0) addOrUpdateCartItem("Cleanser", 200, cleanserQty);
+            if (faceSerumQty > 0) addOrUpdateCartItem("Face Serum", 380, faceSerumQty);
+            if (suncreenQty > 0) addOrUpdateCartItem("Sunscreen", 300, suncreenQty);
+            if (LipBalmQty > 0) addOrUpdateCartItem("Lip Balm", 190, LipBalmQty);
+            if (shampooQty > 0) addOrUpdateCartItem("Shampoo", 874, shampooQty);
+            if (conditionerQty > 0) addOrUpdateCartItem("Conditioner", 625, conditionerQty);
+
+            saveCartItems(cartItems); // Save updated cart items to localStorage
+
+            alert("Products added to cart!"); // Optional success message
+
+            window.location.href = "{% url 'cart' %}"; // Redirect to the cart page
+        });
+    </script>
+ <!-- Footer Start -->
+ <div class="container-fluid bg-white footer">
     <div class="container py-5">
         <div class="row g-5">
             <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">

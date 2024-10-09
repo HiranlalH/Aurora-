@@ -1,213 +1,87 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <title>Aurora - Contact</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
-
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
-
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Poppins:wght@200;600;700&display=swap"
-        rel="stylesheet">
-
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-
-    <!-- Template Stylesheet -->
-    <link href="{% static 'css/style.css' %}" rel="stylesheet">
-</head>
-
-<body>
-    <!-- Spinner Start -->
-    <div id="spinner"
-        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-    </div>
-    <!-- Spinner End -->
-
-<!-- Navbar Start -->
-<div class="container-fluid sticky-top">
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light p-0">
-            <a href="{% url 'index' %}" class="navbar-brand">
-                <h2 class="text-white">Aurora</h2>
-            </a>
-            <button type="button" class="navbar-toggler ms-auto me-0" data-bs-toggle="collapse"
-                data-bs-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <div class="navbar-nav ms-auto">
-                    <a href="{% url 'index' %}" class="nav-item nav-link">Home</a>
-                    <a href="{% url 'about' %}" class="nav-item nav-link active">About</a>
-                    <a href="{% url 'product' %}" class="nav-item nav-link">Products</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu bg-light mt-2">
-                            <a href="{% url 'feature' %}" class="dropdown-item">Features</a>
-                            <a href="{% url 'Prediction' %}" class="dropdown-item">Prediction</a>
-                            <a href="{% url 'testimonial' %}" class="dropdown-item">Testimonial</a>
-                            <a href="{% url 'blog' %}" class="dropdown-item">Blog Articles</a>
-                            <a href="{% url 'error' %}" class="dropdown-item">Error Page</a>
-                            <a href="{% url 'feedback' %}" class="dropdown-item">Feedback Page</a>
-                            <a href="{% url 'payment' %}" class="dropdown-item">Payment Page</a>
-
-                        </div>
-                    </div>
-                    <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Login</a>
-                        <div class="dropdown-menu bg-light mt-2">
-                            <a href="{% url 'userlogin' %}" class="dropdown-item">Login</a>
-                            <a href="{% url 'userreg' %}" class="dropdown-item">Registration</a>
-                        </div>
-                    </div>
-                </div>
-                <a href="{% url 'product' %}" class="btn btn-dark py-2 px-4 d-none d-lg-inline-block">Shop Now</a>
-            </div>
-        </nav>
-    </div>
-</div>
-
-<!-- Navbar End --> 
-
-
-    <!-- Hero Start -->
-    <div class="container-fluid bg-primary hero-header mb-5">
-        <div class="container text-center">
-            <h1 class="display-4 text-white mb-3 animated slideInDown">Payment</h1>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb justify-content-center mb-0 animated slideInDown">
-                    <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
-                    <li class="breadcrumb-item text-white active" aria-current="page">Payement</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
-    <!-- Hero End -->
-
-    
-    <div class="container">
-        <h2>QR Code Payment</h2>
-        <p class="payment-info">Please scan the QR code below to complete your payment.</p>
-        
-        <!-- QR Code Image (Placeholder, should be dynamically generated) -->
-        <img src="{% static 'img/QR.jpg' %}" alt="QR Code"  class="qr-code">
-        
-        <p class="amount">Amount: $50.00</p>
-        
-        <p class="instructions">Open your mobile payment app and scan the QR code to make the payment.</p>
-        
-        <button class="pay-btn" onclick="confirmPayment()">Confirm Payment</button>
-    </div>
-    
-
-    
-    <script>
-        function confirmPayment() {
-            alert("Payment confirmed! Thank you.");
-            // Further logic for payment confirmation can be added here.
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #e9f7ef; /* Light green background */
         }
-    </script>
-    
- <!-- Footer Start -->
- <div class="container-fluid bg-white footer">
-    <div class="container py-5">
-        <div class="row g-5">
-            <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
-                <a href="{% url 'index' %}" class="d-inline-block mb-3">
-                    <h1 class="text-primary">Aurora</h1>
-                </a>
-                <p class="mb-0">With us, beauty meets technology to create a brighter, healthier future.</p>
-            </div>
-            <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
-                <h5 class="mb-4">Get In Touch</h5>
-                <p><i class="fa fa-map-marker-alt me-3"></i>Aurora, 123 Harmony Lane, Rosewood Gardens, Bandra West, Mumbai, Maharashtra, India 400050</p>
-                <p><i class="fa fa-phone-alt me-3"></i>+91 9876543210</p>
-                <p><i class="fa fa-envelope me-3"></i>contact@aurorabeauty.in</p>
-                <div class="d-flex pt-2">
-                    <a class="btn btn-square btn-outline-primary me-1" href="https://x.com/i/flow/login?input_flow_data=%7B%22requested_variant%22%3A%22eyJteCI6IjIifQ%3D%3D%22%7D"><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-square btn-outline-primary me-1" href="https://www.facebook.com/login/"><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-square btn-outline-primary me-1" href="https://www.instagram.com/aurorabeautylv/"><i class="fab fa-instagram"></i></a>
-                    <a class="btn btn-square btn-outline-primary me-1" href="https://www.linkedin.com/"><i class="fab fa-linkedin-in"></i></a>
+        .container {
+            margin-top: 50px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 30px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .card-image {
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 20px;
+            margin: 0 auto; /* Center the image */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Payment</h1>
+        <div class="text-center">
+            <img src="{% static 'img/card.png' %}" alt="Credit Card" class="card-image"> <!-- Ensure the image path is correct -->
+        </div>
+
+        <div class="payment-option text-center">
+            <h3>Pay Using Card</h3>
+            <form id="cardPaymentForm">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Card Number" id="cardNumber" required pattern="\d{16}" title="Please enter a valid card number (16 digits)">
                 </div>
-            </div>
-            <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
-                <h5 class="mb-4">Our Products</h5>
-                <a class="btn btn-link" href="{% url 'product' %}">Body</a>
-                <a class="btn btn-link" href="{% url 'product' %}">Face</a>
-                <a class="btn btn-link" href="{% url 'product' %}">Lip</a>
-                <a class="btn btn-link" href="{% url 'product' %}">Hair</a>
-                
-            </div>
-            <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
-                <h5 class="mb-4">Popular Link</h5>
-                <a class="btn btn-link" href="{% url 'about' %}">About Us</a>
-                <a class="btn btn-link" href="{% url 'contact' %}">Contact Us</a>
-                <a class="btn btn-link" href="{% url 'feature' %}">Benefits</a>
-                <a class="btn btn-link" href="{% url 'blog' %}">Blog</a>
-                <a class="btn btn-link" href="{% url 'testimonial' %}">Testimonial</a>
-            </div>
-        </div>
-    </div>
-    <div class="container wow fadeIn" data-wow-delay="0.1s">
-        <div class="copyright">
-            <div class="row">
-                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    &copy; <a class="border-bottom">Aurora</a>
-
-                    
-                <!-- <div class="col-md-6 text-center text-md-end">
-                    <div class="footer-menu">
-                        <a href="">Home</a>
-                        <a href="">Cookies</a>
-                        <a href="">Help</a>
-                        <a href="">FAQs</a>
+                <div class="form-row">
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="MM/YYYY" id="expiryDate" required pattern="^(0[1-9]|1[0-2])\/[0-9]{4}$" title="Please enter a valid expiry date (MM/YYYY)">
                     </div>
-                </div> -->
-            </div>
+                    <div class="col">
+                        <input type="password" class="form-control" placeholder="CVV" id="cvv" required pattern="\d{3}" title="Please enter a valid CVV (3 digits)" maxlength="3">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mt-3">Pay Now</button>
+            </form>
         </div>
     </div>
-</div>
-<!-- Footer End -->
 
+    <script>
+        // Handle card payment form submission
+        document.getElementById("cardPaymentForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            
+            const cardNumber = document.getElementById("cardNumber").value;
+            const expiryDate = document.getElementById("expiryDate").value;
+            const cvv = document.getElementById("cvv").value;
 
+            // Validate fields
+            if (!/^\d{16}$/.test(cardNumber)) {
+                alert("Please enter a valid card number (16 digits).");
+                return;
+            }
+            if (!/^(0[1-9]|1[0-2])\/[0-9]{4}$/.test(expiryDate)) {
+                alert("Please enter a valid expiry date (MM/YYYY).");
+                return;
+            }
+            if (!/^\d{3}$/.test(cvv)) {
+                alert("Please enter a valid CVV (3 digits).");
+                return;
+            }
 
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-
-
-        <!-- JavaScript Libraries -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="{% static 'lib/wow/wow.min.js' %}"></script>
-        <script src="{% static 'lib/easing/easing.min.js' %}"></script>
-        <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
-        <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
-    
-        <!-- Template Javascript -->
-        <script src="{% static 'js/main.js' %}"></script>
-    </body>
-    
-    </html>
-
+            // If all validations pass
+            alert("Payment successful!"); // You can display a success message here
+            window.location.href = "{% url 'confirmation' %}"; // Redirect to confirmation page
+        });
+    </script>
+</body>
+</html>

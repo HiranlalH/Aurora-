@@ -69,3 +69,12 @@ def feedback(request):
 
 def payment(request):
     return render(request,"payment.html")
+
+def cart(request):
+    return render(request,"cart.html")
+
+def checkout(request):
+    return render(request,"checkout.html")
+
+def confirmation(request):
+    return render(request,"confirmation.html")

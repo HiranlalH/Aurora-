@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #e9f7ef; /* Light green background */
+        }
+        .container {
+            margin-top: 50px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 30px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .invoice-table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .invoice-table th, .invoice-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        .invoice-table th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        .total-amount {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .invoice-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .date-time {
+            text-align: right;
+            font-size: 0.9em;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Order Confirmation</h1>
+        <div class="invoice-header">
+            <h2>Aurora Beauty Products</h2>
+            <p>Thank you for your order!</p>
+        </div>
+        <div id="invoiceDetails"></div>
+        <button class="btn btn-primary mt-3" onclick="downloadInvoice()">Download Invoice</button>
+    </div>
+
+    <script>
+        // Function to calculate the total amount
+        function calculateTotal(cartItems) {
+            return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+        }
+
+        // Function to render the invoice
+        function renderInvoice() {
+            const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+            const invoiceContainer = document.getElementById("invoiceDetails");
+            const currentDate = new Date();
+
+            if (cartItems.length === 0) {
+                invoiceContainer.innerHTML = "<p>No items in the cart.</p>";
+                return;
+            }
+
+            let tableHTML = `
+                <table class="table invoice-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price (Rs)</th>
+                            <th>Total (Rs)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            cartItems.forEach(item => {
+                const totalPrice = (item.price * item.quantity).toFixed(2); // Calculate total for the item
+                tableHTML += `
+                    <tr>
+                        <td>${item.name}</td>
+                        <td>${item.quantity}</td>
+                        <td>Rs ${item.price.toFixed(2)}</td>
+                        <td>Rs ${totalPrice}</td>
+                    </tr>
+                `;
+            });
+
+            const grandTotal = calculateTotal(cartItems);
+            tableHTML += `
+                    </tbody>
+                </table>
+                <p class="total-amount">Total Amount: Rs ${grandTotal.toFixed(2)}</p>
+                <p class="date-time">Date: ${currentDate.toLocaleDateString()} Time: ${currentDate.toLocaleTimeString()}</p>
+            `;
+
+            invoiceContainer.innerHTML = tableHTML;
+        }
+
+        // Function to download the invoice as a PDF (using jsPDF)
+        function downloadInvoice() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.setFontSize(16);
+            doc.text("Order Confirmation", 20, 20);
+            const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+            const currentDate = new Date();
+
+            let invoiceContent = "Product\tQuantity\tPrice (Rs)\tTotal (Rs)\n";
+            cartItems.forEach(item => {
+                const totalPrice = (item.price * item.quantity).toFixed(2);
+                invoiceContent += `${item.name}\t${item.quantity}\tRs ${item.price.toFixed(2)}\tRs ${totalPrice}\n`;
+            });
+
+            const grandTotal = calculateTotal(cartItems);
+            invoiceContent += `\nTotal Amount: Rs ${grandTotal.toFixed(2)}\n`;
+            invoiceContent += `Date: ${currentDate.toLocaleDateString()} Time: ${currentDate.toLocaleTimeString()}`;
+
+            doc.text(invoiceContent, 20, 40);
+            doc.save("invoice.pdf");
+        }
+
+        // Call renderInvoice on page load
+        window.onload = renderInvoice;
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+</body>
+</html>
