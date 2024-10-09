@@ -346,98 +346,9 @@ img.animated.pulse {
     z-index: 1;
 }
 
-/*** Feedback ***/
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
 
-.feedback-container {
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 90%; /* Responsive width */
-    max-width: 500px; /* Max width for larger screens */
-}
 
-h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-    color: #333;
-}
-
-input[type="text"],
-input[type="email"],
-select,
-textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-textarea {
-    resize: none; /* Prevent resizing */
-}
-
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #5cb85c;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-button:hover {
-    background-color: #4cae4c;
-}
-
-/* Responsive styles */
-@media (max-width: 768px) {
-    .feedback-container {
-        padding: 20px;
-    }
-
-    h2 {
-        font-size: 1.5rem; /* Adjust font size on smaller screens */
-    }
-
-    input[type="text"],
-    input[type="email"],
-    select,
-    textarea {
-        font-size: 16px; /* Increase font size for better readability */
-    }
-
-    button {
-        font-size: 18px; /* Increase button font size */
-    }
-}
  
 
 /***Payment***/
