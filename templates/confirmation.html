@@ -55,8 +55,15 @@
             font-size: 0.9em;
             color: #000000;
         }
+        .btn-primary, .btn-home {
+            color: white; /* Set button text color to white */
+        }
         .btn-primary {
             background-color: #107728;
+            border: none;
+        }
+        .btn-home {
+            background-color: #dc3545;
             border: none;
         }
     </style>
@@ -70,6 +77,7 @@
         </div>
         <div id="invoiceDetails"></div>
         <button class="btn btn-primary mt-4" onclick="downloadInvoice()">Download Invoice</button>
+        <button class="btn btn-home mt-4" id="homeButton" onclick="redirectToHome()">Return to Home</button>
     </div>
 
     <script>
@@ -143,46 +151,52 @@
             const startY = 40; // Starting Y position for the content
             const rowHeight = 10; // Height of each row
 
-    // Column widths
-    const col1Width = 80; // Product name column width
-    const col2Width = 30; // Quantity column width
-    const col3Width = 30; // Price column width
-    const col4Width = 30; // Total column width
+            // Column widths
+            const col1Width = 80; // Product name column width
+            const col2Width = 30; // Quantity column width
+            const col3Width = 30; // Price column width
+            const col4Width = 30; // Total column width
 
-    // Table headers
-    doc.text("Product", 20, startY);
-    doc.text("Quantity", 20 + col1Width, startY);
-    doc.text("Price (Rs)", 20 + col1Width + col2Width, startY);
-    doc.text("Total (Rs)", 20 + col1Width + col2Width + col3Width, startY);
+            // Table headers
+            doc.text("Product", 20, startY);
+            doc.text("Quantity", 20 + col1Width, startY);
+            doc.text("Price (Rs)", 20 + col1Width + col2Width, startY);
+            doc.text("Total (Rs)", 20 + col1Width + col2Width + col3Width, startY);
 
-    // Add a line below the header
-    doc.setDrawColor(0);
-    doc.line(20, startY + 2, 20 + col1Width + col2Width + col3Width + col4Width, startY + 2);
+            // Add a line below the header
+            doc.setDrawColor(0);
+            doc.line(20, startY + 2, 20 + col1Width + col2Width + col3Width + col4Width, startY + 2);
 
-    let currentY = startY + rowHeight;
+            let currentY = startY + rowHeight;
 
-    cartItems.forEach(item => {
-        const totalPrice = (item.price * item.quantity).toFixed(2);
-        doc.text(item.name, 20, currentY);
-        doc.text(item.quantity.toString(), 20 + col1Width, currentY);
-        doc.text(`Rs ${item.price.toFixed(2)}`, 20 + col1Width + col2Width, currentY);
-        doc.text(`Rs ${totalPrice}`, 20 + col1Width + col2Width + col3Width, currentY);
-        currentY += rowHeight;
-    });
+            cartItems.forEach(item => {
+                const totalPrice = (item.price * item.quantity).toFixed(2);
+                doc.text(item.name, 20, currentY);
+                doc.text(item.quantity.toString(), 20 + col1Width, currentY);
+                doc.text(`Rs ${item.price.toFixed(2)}`, 20 + col1Width + col2Width, currentY);
+                doc.text(`Rs ${totalPrice}`, 20 + col1Width + col2Width + col3Width, currentY);
+                currentY += rowHeight;
+            });
 
-    const grandTotal = calculateTotal(cartItems);
-    currentY += 5; // Space before total amount
-    doc.setFontSize(14);
-    doc.text(`Total Amount: Rs ${grandTotal.toFixed(2)}`, 20, currentY);
-    currentY += 10; // Space before date and time
-    doc.setFontSize(12);
-    doc.text(`Date: ${currentDate.toLocaleDateString()}`, 20, currentY);
-    currentY += 5;
-    doc.text(`Time: ${currentDate.toLocaleTimeString()}`, 20, currentY);
+            const grandTotal = calculateTotal(cartItems);
+            currentY += 5; // Space before total amount
+            doc.setFontSize(14);
+            doc.text(`Total Amount: Rs ${grandTotal.toFixed(2)}`, 20, currentY);
+            currentY += 10; // Space before date and time
+            doc.setFontSize(12);
+            doc.text(`Date: ${currentDate.toLocaleDateString()}`, 20, currentY);
+            currentY += 5;
+            doc.text(`Time: ${currentDate.toLocaleTimeString()}`, 20, currentY);
 
-    doc.save("invoice.pdf");
-}
+            doc.save("invoice.pdf");
+        }
 
+        // Function to redirect to the home page
+        function redirectToHome() {
+            const homeButton = document.getElementById("homeButton");
+            homeButton.style.color = "white"; // Ensure button text stays white after click
+            window.location.href = "/"; // Update this URL if your home page has a different path
+        }
 
         // Call renderInvoice on page load
         window.onload = renderInvoice;
