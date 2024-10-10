@@ -6,13 +6,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        /* Set the background image */
+        body {
+            background-image: url("{% static 'img/checkout.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh; /* Ensure the image covers the full height */
+        }
+
+        /* Make the container more transparent */
+        .container {
+            background-color: rgb(255, 255, 255); /* Slightly more transparent */
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        /* Ensure table borders are visible */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 2px solid black; /* Thicker borders */
+        }
+
+        th {
+            background-color: rgba(40, 167, 69, 0.7); /* Semi-transparent green for table headers */
+            color: rgb(255, 255, 255);
+        }
+
+        td {
+            font-size: 1.1em;
+            color: #000000; /* Dark text color for table data */
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        .btn-secondary, .btn-success {
+            padding: 10px 20px;
+            font-size: 1.1em;
+            margin-top: 20px;
+        }
+        .btn-secondary {
+            background-color: #dc3545;
+            border: none;
+        }
+
+        .btn-success {
+            background-color: #107728;
+            border: none;
+        }
+    </style>
+
 </head>
 <body>
     <div class="container py-5">
         <h1 class="text-center">Checkout</h1>
         <div id="checkoutContent"></div>
         <div class="text-center mt-4">
+            <button class="btn btn-secondary" id="backToCart">Back to Cart</button> <!-- Back button -->
             <button class="btn btn-success" id="proceedToPayment">Proceed to Payment</button>
+            
         </div>
     </div>
 
@@ -49,6 +106,11 @@
 
             checkoutContentDiv.innerHTML = checkoutHTML;
         }
+
+        // Back to Cart
+        document.getElementById("backToCart").addEventListener("click", function() {
+            window.location.href = "{% url 'cart' %}"; // Redirect to the cart page
+        });
 
         // Proceed to Payment
         document.getElementById("proceedToPayment").addEventListener("click", function() {
