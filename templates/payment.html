@@ -8,7 +8,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #e9f7ef; /* Light green background */
+            background-image: url("{% static 'img/checkout.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh; /* Ensure the image covers the full height */
         }
         .container {
             margin-top: 50px;
@@ -26,6 +30,10 @@
             max-width: 400px;
             margin-bottom: 20px;
             margin: 0 auto; /* Center the image */
+        }
+        .btn-primary {
+            background-color: #107728;
+            border: none;
         }
     </style>
 </head>

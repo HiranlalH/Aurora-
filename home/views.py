@@ -78,3 +78,29 @@ def checkout(request):
 
 def confirmation(request):
     return render(request,"confirmation.html")
+
+
+def cart_view(request):
+    if request.method == 'POST':
+        cart_items = {}
+        body_lotion_qty = int(request.POST.get('body_lotion', 0))
+        if body_lotion_qty > 0:
+            cart_items['Body Lotion'] = {'qty': body_lotion_qty, 'price': 500}
+
+        # Repeat for other products
+        face_cream_qty = int(request.POST.get('face_cream', 0))
+        if face_cream_qty > 0:
+            cart_items['Face Cream'] = {'qty': face_cream_qty, 'price': 410}
+
+        # Add more products similarly...
+
+        # Save cart_items in session or pass to context
+        request.session['cart_items'] = cart_items
+        
+        return redirect('cart_display')  # Redirect to the cart display page
+
+    return render(request, 'cart.html')
+
+def cart_display_view(request):
+    cart_items = request.session.get('cart_items', {})
+    return render(request, 'cart.html', {'cart_items': cart_items})
