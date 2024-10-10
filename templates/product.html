@@ -32,84 +32,84 @@
 
     <!-- Template Stylesheet -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
-<style>
-    /* Global styling */
-    body {
-        font-family: 'Arial', sans-serif;
-        background-color: #f8f9fa;
-    }
+    <style>
+        /* Global styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+        }
 
-    h1 {
-        font-size: 2.5rem;
-        font-weight: bold;
-        letter-spacing: 1px;
-    }
-
-    /* Styling for product section */
-    .product-item {
-        position: relative;
-        background: #fff;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .product-item img {
-        width: 100%;
-        height: auto;
-        transition: transform 0.3s ease;
-    }
-
-    .product-item:hover img {
-        transform: scale(1.05);
-    }
-
-    .product-item h5 {
-        font-size: 1.25rem;
-        color: #ff6f61;
-    }
-
-    .product-item a {
-        font-size: 1.1rem;
-        font-weight: 600;
-        color: #000;
-    }
-
-    .product-item a:hover {
-        color: #ff6f61;
-        text-decoration: none;
-    }
-
-    .product-item input {
-        border-radius: 5px;
-    }
-
-    /* Button styling */
-    .btn-primary {
-        background-color: #ff6f61;
-        border: none;
-    }
-
-    .btn-primary:hover {
-        background-color: #e55b50;
-    }
-
-    /* Responsive grid */
-    @media (max-width: 768px) {
         h1 {
-            font-size: 2rem;
+            font-size: 2.5rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* Styling for product section */
+        .product-item {
+            position: relative;
+            background: #fff;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-item img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .product-item:hover img {
+            transform: scale(1.05);
         }
 
         .product-item h5 {
-            font-size: 1.1rem;
+            font-size: 1.25rem;
+            color: #ff6f61;
         }
 
         .product-item a {
-            font-size: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #000;
         }
-    }
-        
-</style>
 
+        .product-item a:hover {
+            color: #ff6f61;
+            text-decoration: none;
+        }
+
+        .product-item input {
+            border-radius: 5px;
+        }
+
+        /* Button styling */
+        .btn-primary {
+            background-color: #ff6f61;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #e55b50;
+        }
+
+        /* Responsive grid */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .product-item h5 {
+                font-size: 1.1rem;
+            }
+
+            .product-item a {
+                font-size: 1rem;
+            }
+        }
+    </style>
+    {% block extrascript %}
+    {% endblock extrascript %}
 </head>
 
 <body>
@@ -123,51 +123,56 @@
     <!-- Spinner End -->
 
 
-<!-- Navbar Start -->
-<div class="container-fluid sticky-top">
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light p-0">
-            <a href="{% url 'index' %}" class="navbar-brand">
-                <h2 class="text-white">Aurora</h2>
-            </a>
-            <button type="button" class="navbar-toggler ms-auto me-0" data-bs-toggle="collapse"
-                data-bs-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <div class="navbar-nav ms-auto">
-                    <a href="{% url 'index' %}" class="nav-item nav-link">Home</a>
-                    <a href="{% url 'about' %}" class="nav-item nav-link active">About</a>
-                    <a href="{% url 'product' %}" class="nav-item nav-link">Products</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu bg-light mt-2">
-                            <a href="{% url 'feature' %}" class="dropdown-item">Features</a>
-                            <a href="{% url 'Prediction' %}" class="dropdown-item">Prediction</a>
-                            <a href="{% url 'testimonial' %}" class="dropdown-item">Testimonial</a>
-                            <a href="{% url 'blog' %}" class="dropdown-item">Blog Articles</a>
-                            <a href="{% url 'error' %}" class="dropdown-item">Error Page</a>
-                            <a href="{% url 'feedback' %}" class="dropdown-item">Feedback Page</a>
-                            
+    <!-- Navbar Start -->
+    <div class="container-fluid sticky-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light p-0">
+                <a href="{% url 'index' %}" class="navbar-brand">
+                    <h2 class="text-white">Aurora</h2>
+                </a>
+                <button type="button" class="navbar-toggler ms-auto me-0" data-bs-toggle="collapse"
+                    data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto">
+                        <a href="{% url 'index' %}" class="nav-item nav-link">Home</a>
+                        <a href="{% url 'about' %}" class="nav-item nav-link active">About</a>
+                        <a href="{% url 'product' %}" class="nav-item nav-link">Products</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                            <div class="dropdown-menu bg-light mt-2">
+                                <a href="{% url 'feature' %}" class="dropdown-item">Features</a>
+                                <a href="{% url 'Prediction' %}" class="dropdown-item">Prediction</a>
+                                <a href="{% url 'testimonial' %}" class="dropdown-item">Testimonial</a>
+                                <a href="{% url 'blog' %}" class="dropdown-item">Blog Articles</a>
+                                <a href="{% url 'error' %}" class="dropdown-item">Error Page</a>
+                                <a href="{% url 'feedback' %}" class="dropdown-item">Feedback Page</a>
 
+
+                            </div>
+                        </div>
+                        <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle active"
+                                data-bs-toggle="dropdown">Sign-In/Out</a>
+                            <div class="dropdown-menu bg-light mt-2">
+                                {% if request.user.is_authenticated %}
+                                <a href="{% url 'userlogout' %}" class="dropdown-item">LogOut</a>
+                                {% else %}
+                                <a href="{% url 'userlogin' %}" class="dropdown-item">LogIn</a>
+                                <a href="{% url 'userreg' %}" class="dropdown-item">Registration</a>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
-                    <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Login</a>
-                        <div class="dropdown-menu bg-light mt-2">
-                            <a href="{% url 'userlogin' %}" class="dropdown-item">Login</a>
-                            <a href="{% url 'userreg' %}" class="dropdown-item">Registration</a>
-                        </div>
-                    </div>
+                    <a href="{% url 'product' %}" class="btn btn-dark py-2 px-4 d-none d-lg-inline-block">Shop Now</a>
                 </div>
-                <a href="{% url 'product' %}" class="btn btn-dark py-2 px-4 d-none d-lg-inline-block">Shop Now</a>
-            </div>
-        </nav>
+            </nav>
+        </div>
     </div>
-</div>
 
-<!-- Navbar End --> 
+    <!-- Navbar End -->
 
 
     <!-- Hero Start -->
@@ -189,7 +194,9 @@
         <div class="container">
             <div class="mx-auto text-center mb-5" style="max-width: 600px;">
                 <h1 class="text-primary mb-3"><span class="fw-light text-dark">Our</span> Products</h1>
-                <p class="text-muted">Illuminate your beauty with Aurora's curated collection. From nourishing skincare to revitalizing haircare, our products blend nature's finest ingredients to bring out your natural glow.</p>
+                <p class="text-muted">Illuminate your beauty with Aurora's curated collection. From nourishing skincare
+                    to revitalizing haircare, our products blend nature's finest ingredients to bring out your natural
+                    glow.</p>
             </div>
             <div class="row g-4">
                 <form id="productForm">
@@ -199,7 +206,8 @@
                                 <img class="img-fluid mb-4" src="{% static 'img/body lotion.png' %}" alt="Body Lotion">
                                 <a href="#" class="h6 d-inline-block mb-2">Body Lotion</a>
                                 <h5 class="mb-3">Rs. 500</h5>
-                                <input type="number" min="0" value="0" id="bodyLotionQty" class="form-control mb-2" placeholder="Quantity">
+                                <input type="number" min="0" value="0" id="bodyLotionQty" class="form-control mb-2"
+                                    placeholder="Quantity">
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-3">
@@ -207,7 +215,8 @@
                                 <img class="img-fluid mb-4" src="{% static 'img/face cream.jpg' %}" alt="Face Cream">
                                 <a href="#" class="h6 d-inline-block mb-2">Face Cream</a>
                                 <h5 class="mb-3">Rs. 410</h5>
-                                <input type="number" min="0" value="0" id="faceCreamQty" class="form-control mb-2" placeholder="Quantity">
+                                <input type="number" min="0" value="0" id="faceCreamQty" class="form-control mb-2"
+                                    placeholder="Quantity">
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-3">
@@ -215,7 +224,8 @@
                                 <img class="img-fluid mb-4" src="{% static 'img/facewash.jpg' %}" alt="Face Wash">
                                 <a href="#" class="h6 d-inline-block mb-2">Face Wash</a>
                                 <h5 class="mb-3">Rs. 210</h5>
-                                <input type="number" min="0" value="0" id="facewashQty" class="form-control mb-2" placeholder="Quantity">
+                                <input type="number" min="0" value="0" id="facewashQty" class="form-control mb-2"
+                                    placeholder="Quantity">
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-3">
@@ -223,7 +233,8 @@
                                 <img class="img-fluid mb-4" src="{% static 'img/cleanser.jpg' %}" alt="Cleanser">
                                 <a href="#" class="h6 d-inline-block mb-2">Cleanser</a>
                                 <h5 class="mb-3">Rs. 200</h5>
-                                <input type="number" min="0" value="0" id="cleanserQty" class="form-control mb-2" placeholder="Quantity">
+                                <input type="number" min="0" value="0" id="cleanserQty" class="form-control mb-2"
+                                    placeholder="Quantity">
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-3">
@@ -231,7 +242,8 @@
                                 <img class="img-fluid mb-4" src="{% static 'img/face serum.jpg' %}" alt="Face Serum">
                                 <a href="#" class="h6 d-inline-block mb-2">Face Serum</a>
                                 <h5 class="mb-3">Rs. 380</h5>
-                                <input type="number" min="0" value="0" id="faceSerumQty" class="form-control mb-2" placeholder="Quantity">
+                                <input type="number" min="0" value="0" id="faceSerumQty" class="form-control mb-2"
+                                    placeholder="Quantity">
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-3">
@@ -239,7 +251,8 @@
                                 <img class="img-fluid mb-4" src="{% static 'img/sunscreen.jpg' %}" alt="Sunscreen">
                                 <a href="#" class="h6 d-inline-block mb-2">Sunscreen</a>
                                 <h5 class="mb-3">Rs. 300</h5>
-                                <input type="number" min="0" value="0" id="suncreenQty" class="form-control mb-2" placeholder="Quantity">
+                                <input type="number" min="0" value="0" id="suncreenQty" class="form-control mb-2"
+                                    placeholder="Quantity">
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-3">
@@ -247,7 +260,8 @@
                                 <img class="img-fluid mb-4" src="{% static 'img/lip balm.png' %}" alt="Lip Balm">
                                 <a href="#" class="h6 d-inline-block mb-2">Lip Balm</a>
                                 <h5 class="mb-3">Rs. 190</h5>
-                                <input type="number" min="0" value="0" id="LipBalmQty" class="form-control mb-2" placeholder="Quantity">
+                                <input type="number" min="0" value="0" id="LipBalmQty" class="form-control mb-2"
+                                    placeholder="Quantity">
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-3">
@@ -255,7 +269,8 @@
                                 <img class="img-fluid mb-4" src="{% static 'img/Shampoo.jpg' %}" alt="Shampoo">
                                 <a href="#" class="h6 d-inline-block mb-2">Shampoo</a>
                                 <h5 class="mb-3">Rs. 874</h5>
-                                <input type="number" min="0" value="0" id="shampooQty" class="form-control mb-2" placeholder="Quantity">
+                                <input type="number" min="0" value="0" id="shampooQty" class="form-control mb-2"
+                                    placeholder="Quantity">
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-3">
@@ -263,11 +278,15 @@
                                 <img class="img-fluid mb-4" src="{% static 'img/conditioner.jpg' %}" alt="Conditioner">
                                 <a href="#" class="h6 d-inline-block mb-2">Conditioner</a>
                                 <h5 class="mb-3">Rs. 625</h5>
-                                <input type="number" min="0" value="0" id="conditionerQty" class="form-control mb-2" placeholder="Quantity">
+                                <input type="number" min="0" value="0" id="conditionerQty" class="form-control mb-2"
+                                    placeholder="Quantity">
                             </div>
                         </div>
                         <div class="col-12 text-center mt-4">
+
                             <button type="submit" class="btn btn-primary py-2 px-4">Add To Cart</button>
+
+
                         </div>
                     </div>
                 </form>
@@ -288,7 +307,7 @@
         }
 
         // Add event listener to the form submission
-        document.getElementById("productForm").addEventListener("submit", function(event) {
+        document.getElementById("productForm").addEventListener("submit", function (event) {
             event.preventDefault(); // Prevent page reload
 
             let cartItems = getCartItems(); // Get existing cart items
@@ -330,58 +349,74 @@
             saveCartItems(cartItems); // Save updated cart items to localStorage
 
             alert("Products added to cart!"); // Optional success message
+            const isAuthenticated = {% if user.is_authenticated %} true {% else %} false {% endif %};
 
-            window.location.href = "{% url 'cart' %}"; // Redirect to the cart page
+                if (isAuthenticated) {
+                    window.location.href = "{% url 'cart' %}"; // Redirect to the cart page
+                } else {
+                    window.location.href = "{% url 'userlogin' %}"; // Redirect to the login page
+                }
+        
+            
         });
+
     </script>
- <!-- Footer Start -->
- <div class="container-fluid bg-white footer">
-    <div class="container py-5">
-        <div class="row g-5">
-            <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
-                <a href="{% url 'index' %}" class="d-inline-block mb-3">
-                    <h1 class="text-primary">Aurora</h1>
-                </a>
-                <p class="mb-0">With us, beauty meets technology to create a brighter, healthier future.</p>
-            </div>
-            <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
-                <h5 class="mb-4">Get In Touch</h5>
-                <p><i class="fa fa-map-marker-alt me-3"></i>Aurora, 123 Harmony Lane, Rosewood Gardens, Bandra West, Mumbai, Maharashtra, India 400050</p>
-                <p><i class="fa fa-phone-alt me-3"></i>+91 9876543210</p>
-                <p><i class="fa fa-envelope me-3"></i>contact@aurorabeauty.in</p>
-                <div class="d-flex pt-2">
-                    <a class="btn btn-square btn-outline-primary me-1" href="https://x.com/i/flow/login?input_flow_data=%7B%22requested_variant%22%3A%22eyJteCI6IjIifQ%3D%3D%22%7D"><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-square btn-outline-primary me-1" href="https://www.facebook.com/login/"><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-square btn-outline-primary me-1" href="https://www.instagram.com/aurorabeautylv/"><i class="fab fa-instagram"></i></a>
-                    <a class="btn btn-square btn-outline-primary me-1" href="https://www.linkedin.com/"><i class="fab fa-linkedin-in"></i></a>
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-white footer">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
+                    <a href="{% url 'index' %}" class="d-inline-block mb-3">
+                        <h1 class="text-primary">Aurora</h1>
+                    </a>
+                    <p class="mb-0">With us, beauty meets technology to create a brighter, healthier future.</p>
+                </div>
+                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
+                    <h5 class="mb-4">Get In Touch</h5>
+                    <p><i class="fa fa-map-marker-alt me-3"></i>Aurora, 123 Harmony Lane, Rosewood Gardens, Bandra West,
+                        Mumbai, Maharashtra, India 400050</p>
+                    <p><i class="fa fa-phone-alt me-3"></i>+91 9876543210</p>
+                    <p><i class="fa fa-envelope me-3"></i>contact@aurorabeauty.in</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-square btn-outline-primary me-1"
+                            href="https://x.com/i/flow/login?input_flow_data=%7B%22requested_variant%22%3A%22eyJteCI6IjIifQ%3D%3D%22%7D"><i
+                                class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square btn-outline-primary me-1" href="https://www.facebook.com/login/"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square btn-outline-primary me-1"
+                            href="https://www.instagram.com/aurorabeautylv/"><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-square btn-outline-primary me-1" href="https://www.linkedin.com/"><i
+                                class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
+                    <h5 class="mb-4">Our Products</h5>
+                    <a class="btn btn-link" href="{% url 'product' %}">Body</a>
+                    <a class="btn btn-link" href="{% url 'product' %}">Face</a>
+                    <a class="btn btn-link" href="{% url 'product' %}">Lip</a>
+                    <a class="btn btn-link" href="{% url 'product' %}">Hair</a>
+
+                </div>
+                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
+                    <h5 class="mb-4">Popular Link</h5>
+                    <a class="btn btn-link" href="{% url 'about' %}">About Us</a>
+                    <a class="btn btn-link" href="{% url 'contact' %}">Contact Us</a>
+                    <a class="btn btn-link" href="{% url 'feature' %}">Benefits</a>
+                    <a class="btn btn-link" href="{% url 'blog' %}">Blog</a>
+                    <a class="btn btn-link" href="{% url 'testimonial' %}">Testimonial</a>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
-                <h5 class="mb-4">Our Products</h5>
-                <a class="btn btn-link" href="{% url 'product' %}">Body</a>
-                <a class="btn btn-link" href="{% url 'product' %}">Face</a>
-                <a class="btn btn-link" href="{% url 'product' %}">Lip</a>
-                <a class="btn btn-link" href="{% url 'product' %}">Hair</a>
-                
-            </div>
-            <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
-                <h5 class="mb-4">Popular Link</h5>
-                <a class="btn btn-link" href="{% url 'about' %}">About Us</a>
-                <a class="btn btn-link" href="{% url 'contact' %}">Contact Us</a>
-                <a class="btn btn-link" href="{% url 'feature' %}">Benefits</a>
-                <a class="btn btn-link" href="{% url 'blog' %}">Blog</a>
-                <a class="btn btn-link" href="{% url 'testimonial' %}">Testimonial</a>
-            </div>
         </div>
-    </div>
-    <div class="container wow fadeIn" data-wow-delay="0.1s">
-        <div class="copyright">
-            <div class="row">
-                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    &copy; <a class="border-bottom">Aurora</a>
+        <div class="container wow fadeIn" data-wow-delay="0.1s">
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a class="border-bottom">Aurora</a>
 
-                    
-                <!-- <div class="col-md-6 text-center text-md-end">
+
+                        <!-- <div class="col-md-6 text-center text-md-end">
                     <div class="footer-menu">
                         <a href="">Home</a>
                         <a href="">Cookies</a>
@@ -389,30 +424,27 @@
                         <a href="">FAQs</a>
                     </div>
                 </div> -->
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-<!-- Footer End -->
+        <!-- Footer End -->
 
 
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 
-    <!-- JavaScript Libraries -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{% static 'lib/wow/wow.min.js' %}"></script>
-    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
-    <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
-    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+        <!-- JavaScript Libraries -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+        <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+        <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+        <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
 
-    <!-- Template Javascript -->
-    <script src="{% static 'js/main.js' %}"></script>
+        <!-- Template Javascript -->
+        <script src="{% static 'js/main.js' %}"></script>
 </body>
 
 </html>
-
-
-

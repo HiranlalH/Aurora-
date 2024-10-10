@@ -22,7 +22,7 @@ def userlogin(request):
             return redirect(index)
         if user is None:
             msg = "Please check the credentials carefully!"
-            return render(request, 'userlogin.html', {'msg':msg})
+            return render(request, 'index.html', {'msg':msg})
     return render(request,"userlogin.html")
 
 def userreg(request):
@@ -42,6 +42,9 @@ def userreg(request):
             return render(request, 'userreg.html', {'msg':msg})
     return render(request,"userreg.html")
 
+def userlogout(request):
+    logout(request)
+    return redirect('userlogin')
 
 def about(request):
     return render(request,"about.html")
