@@ -199,19 +199,27 @@
                     to revitalizing haircare, our products blend nature's finest ingredients to bring out your natural
                     glow.</p>
             </div>
+            {% if Msg %}
+            {{ Msg }}
+            {% endif %}
             <div class="row g-4">
                 <form id="productForm">
                     <div class="row">
+                        {% for product in products %}
+                        {% if product.product_qty > 0 %}
                         <div class="col-md-6 col-lg-3">
                             <div class="product-item text-center border h-100 p-4 rounded">
-                                <img class="img-fluid mb-4" src="{% static 'img/body lotion.png' %}" alt="Body Lotion">
-                                <a href="#" class="h6 d-inline-block mb-2">Body Lotion</a>
-                                <h5 class="mb-3">Rs. 500</h5>
-                                <input type="number" min="0" value="0" id="bodyLotionQty" class="form-control mb-2"
-                                    placeholder="Quantity">
+                                <img class="img-fluid mb-4" src="{{ product.product_image.url }}" alt="{{ product.product_name }}">
+                                <a href="#" class="h6 d-inline-block mb-2">{{ product.product_name }}</a>
+                                <h5 class="mb-3">Rs.{{ product.unit_price }}</h5>
+                                <div class="col-12 text-center mt-4">
+                                    <button type="submit" class="btn btn-primary py-2 px-4"><a href="{% url 'add_to_cart' p_id=product.id %}" style="color:white;" onclicl="alert('Item added to cart!')">Add To Cart</a></button>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-3">
+                        {% endif %}
+                        {% endfor %}
+                        <!-- <div class="col-md-6 col-lg-3">
                             <div class="product-item text-center border h-100 p-4 rounded">
                                 <img class="img-fluid mb-4" src="{% static 'img/face cream.jpg' %}" alt="Face Cream">
                                 <a href="#" class="h6 d-inline-block mb-2">Face Cream</a>
@@ -219,8 +227,8 @@
                                 <input type="number" min="0" value="0" id="faceCreamQty" class="form-control mb-2"
                                     placeholder="Quantity">
                             </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3">
+                        </div> -->
+                        <!-- <div class="col-md-6 col-lg-3">
                             <div class="product-item text-center border h-100 p-4 rounded">
                                 <img class="img-fluid mb-4" src="{% static 'img/facewash.jpg' %}" alt="Face Wash">
                                 <a href="#" class="h6 d-inline-block mb-2">Face Wash</a>
@@ -228,8 +236,8 @@
                                 <input type="number" min="0" value="0" id="facewashQty" class="form-control mb-2"
                                     placeholder="Quantity">
                             </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3">
+                        </div> -->
+                        <!-- <div class="col-md-6 col-lg-3">
                             <div class="product-item text-center border h-100 p-4 rounded">
                                 <img class="img-fluid mb-4" src="{% static 'img/cleanser.jpg' %}" alt="Cleanser">
                                 <a href="#" class="h6 d-inline-block mb-2">Cleanser</a>
@@ -237,8 +245,8 @@
                                 <input type="number" min="0" value="0" id="cleanserQty" class="form-control mb-2"
                                     placeholder="Quantity">
                             </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3">
+                        </div> -->
+                        <!-- <div class="col-md-6 col-lg-3">
                             <div class="product-item text-center border h-100 p-4 rounded">
                                 <img class="img-fluid mb-4" src="{% static 'img/face serum.jpg' %}" alt="Face Serum">
                                 <a href="#" class="h6 d-inline-block mb-2">Face Serum</a>
@@ -255,8 +263,8 @@
                                 <input type="number" min="0" value="0" id="suncreenQty" class="form-control mb-2"
                                     placeholder="Quantity">
                             </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3">
+                        </div> -->
+                        <!-- <div class="col-md-6 col-lg-3">
                             <div class="product-item text-center border h-100 p-4 rounded">
                                 <img class="img-fluid mb-4" src="{% static 'img/lip balm.png' %}" alt="Lip Balm">
                                 <a href="#" class="h6 d-inline-block mb-2">Lip Balm</a>
@@ -273,8 +281,8 @@
                                 <input type="number" min="0" value="0" id="shampooQty" class="form-control mb-2"
                                     placeholder="Quantity">
                             </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3">
+                        </div> -->
+                        <!-- <div class="col-md-6 col-lg-3">
                             <div class="product-item text-center border h-100 p-4 rounded">
                                 <img class="img-fluid mb-4" src="{% static 'img/conditioner.jpg' %}" alt="Conditioner">
                                 <a href="#" class="h6 d-inline-block mb-2">Conditioner</a>
@@ -282,13 +290,8 @@
                                 <input type="number" min="0" value="0" id="conditionerQty" class="form-control mb-2"
                                     placeholder="Quantity">
                             </div>
-                        </div>
-                        <div class="col-12 text-center mt-4">
-
-                            <button type="submit" class="btn btn-primary py-2 px-4">Add To Cart</button>
-
-
-                        </div>
+                        </div> -->
+                        
                     </div>
                 </form>
             </div>

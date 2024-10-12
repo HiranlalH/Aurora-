@@ -100,11 +100,17 @@
         <div class="container">
             <div class="row g-5 align-items-center">
                 <div class="col-lg-6 text-center text-lg-start">
+                    
+                    {% if not user.is_authenticated %}
                     <h3 class="fw-light text-white animated slideInRight">Radiance of New Beginnings</h3>
                     <h1 class="display-4 text-white animated slideInRight">Where <span class="fw-light text-dark">Beauty</span> Meets the Dawn</h1>
+                    {% else %}
+                    <h2 class="display-4 text-white animated slideInRight">Welcome {{user.username}}</h2>
+                    {% endif %}
                     <!-- <p class="text-white mb-4 animated slideInRight">Lorem ipsum dolor sit amet, consectetur adipiscing
                         elit. Etiam feugiat rutrum lectus, sed auctor ex malesuada id. Orci varius natoque penatibus et
                         magnis dis parturient montes.</p> -->
+                       
                     <a href="{% url 'product' %}" class="btn btn-dark py-2 px-4 me-3 animated slideInRight">Shop Now</a>
                     <a href="{% url 'contact' %}" class="btn btn-outline-dark py-2 px-4 animated slideInRight">Contact Us</a>
                 </div>
@@ -162,7 +168,7 @@
                     <h1 class="text-primary mb-4">Aurora <span class="fw-light text-dark">Awaken Your 
                         Natural Glow</span></h1>
                     <p class="mb-4">
-                        Aurora was founded to unite beauty, health, and technology. Inspired by the beauty of dawn, we focus on both skincare and skin health. Alongside offering premium beauty products made from natural ingredients, Aurora also helps individuals detect and prevent skin cancer with advanced AI-driven technology. Our mission is to enhance your natural radiance while empowering you with tools for healthier skin. Committed to quality, care, and responsibility, our products are gentle and effective, while our skin cancer prediction platform provides accessible, accurate insights for proactive prevention. At Aurora, we believe that beauty goes beyond appearance—it's about your health, too.</p>
+                        At Aurora, we believe that beauty is a reflection of self-care, and we are committed to providing high-quality, natural beauty products that nourish both skin and hair. Our range of products, from face creams to body lotions, are designed with the finest ingredients to bring out your natural radiance while ensuring gentle, effective care. With a focus on purity and sustainability, we strive to offer beauty solutions that are as kind to the environment as they are to your skin. Discover a new era of beauty with Aurora, where nature meets luxury.</p>
                     <p class="mb-4">Whether you're looking to elevate your skincare routine or safeguard your skin's health, Aurora is here for you. With us, beauty meets technology to create a brighter, healthier future.</p>
                     <!-- <a class="btn btn-primary py-2 px-4" href="">Shop Now</a> -->
                 </div>
@@ -399,19 +405,19 @@
                     <div class="owl-carousel testimonial-carousel wow fadeIn" data-wow-delay="0.1s">
                         <div class="testimonial-item text-center" data-dot="1">
                             <img class="img-fluid border p-2" src="{% static 'img/testimonial-1.jpg' %}" alt="">
-                            <h5 class="fw-light lh-base text-white">Beauty and Health Combined "Aurora's products are just what I've been looking for—clean, effective, and gentle on my skin. I especially love the cleanser and lip balm; they work wonders! The added benefit of skin cancer prediction is so valuable, and I appreciate the focus on health alongside beauty."</h5>
+                            <h5 class="fw-light lh-base text-white">“Aurora’s face serum is a game-changer! My skin feels smoother and brighter after just a few weeks. It’s lightweight, non-greasy, and perfect for daily use. I love knowing that it’s made with natural ingredients that are gentle yet effective.”</h5>
                             <h5 class="mb-1">Riya K</h5>
                             <h6 class="fw-light text-white fst-italic mb-0">Bengaluru</h6>
                         </div>
                         <div class="testimonial-item text-center" data-dot="2">
                             <img class="img-fluid border p-2" src="{% static 'img/testimonial-2.jpg' %}" alt="">
-                            <h5 class="fw-light lh-base text-white">Radiant Results with Aurora "I've tried countless skincare products, but Aurora's face serum and body lotion have truly transformed my skin! My skin feels softer, more hydrated, and I love that it's all-natural. Plus, knowing I can easily check my skin health with their AI tool gives me peace of mind. Aurora is a game-changer!"</h5>
+                            <h5 class="fw-light lh-base text-white">“I’ve struggled with dry skin for years, but Aurora’s body lotion has been a lifesaver. It absorbs quickly and keeps my skin moisturized all day without feeling heavy. I appreciate the subtle, natural scent too!”</h5>
                             <h5 class="mb-1">Rohit Kumar S</h5>
                             <h6 class="fw-light text-white fst-italic mb-0">Mumbai</h6>
                         </div>
                         <div class="testimonial-item text-center" data-dot="3">
                             <img class="img-fluid border p-2" src="{% static 'img/testimonial-3.jpg' %}" alt="">
-                            <h5 class="fw-light lh-base text-white">Healthy Skin Inside and Out "Using Aurora's face cream and serum has made my skin visibly healthier and more radiant. But what really impressed me was their skin cancer prediction tool—it’s so easy to use and helps me stay proactive about my skin health. Aurora truly cares about their customers."</h5>
+                            <h5 class="fw-light lh-base text-white">“Aurora’s shampoo and conditioner have completely transformed my hair. It’s now softer, shinier, and much easier to manage. Plus, the fact that it’s free of harsh chemicals makes me feel good about using it regularly.”</h5>
                             <h5 class="mb-1">Daniel Joseph</h5>
                             <h6 class="fw-light text-white fst-italic mb-0">Chennai</h6>
                         </div>

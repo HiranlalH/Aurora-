@@ -106,7 +106,8 @@
     <div class="container">
         <h2>We Value Your Feedback!</h2>
         <p>Please take a moment to share your thoughts with us.</p>
-        <form id="feedbackForm">
+        <form method="POST">
+            {% csrf_token %}
             <div class="input-group">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" placeholder="Your name" required>

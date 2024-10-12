@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from .models import Product, Product_cart, Feedback
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
@@ -61,13 +63,46 @@ def feature(request):
 def Prediction(request):
     return render(request,"Prediction.html")
 
-def product(request):
-    return render(request,"product.html")
+def products(request):
+    products = Product.objects.all()
+    return render(request, "product.html", {'products': products})
+
+def add_to_cart(request, p_id):
+    user = request.user
+    product = Product.objects.get(id = p_id)
+    if Product_cart.objects.filter(user_id = user).exists():
+        if Product_cart.objects.filter(product_id = product).exists():
+            crt = Product_cart.objects.get(user_id = user, product_id = product)
+            crt.product_qty += 1
+            crt.save()
+            return redirect(products)
+        elif not Product_cart.objects.filter(product_id = product).exists():
+            crt = Product_cart.objects.create(user_id = user, product_id = product, product_qty = 1, cart_status = True)
+            crt.save()
+            return redirect(products)
+    crt = Product_cart.objects.create(user_id = user, product_id = product, product_qty = 1, cart_status = True)
+    crt.save()
+    return redirect(products)
+    
+    
+    return redirect(products)
+    
+            
+        
+    
 
 def testimonial(request):
     return render(request,"testimonial.html")
 
 def feedback(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        rating = request.POST.get('rating')
+        comments = request.POST.get('comments')
+        feedbk = Feedback.objects.create(name = name, email = email, rating = rating, comments = comments)
+        feedbk.save()
+        return render(request, 'feedback.html')
     return render(request,"feedback.html")
 
 def payment(request):
@@ -81,6 +116,7 @@ def checkout(request):
 
 def confirmation(request):
     return render(request,"confirmation.html")
+
 
 
 def cart_view(request):
