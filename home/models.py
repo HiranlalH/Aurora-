@@ -21,6 +21,13 @@ class Feedback(models.Model):
     rating = models.CharField(max_length=100)
     comments = models.TextField()
     
+class Contact(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    subject = models.CharField(max_length=50)
+    message = models.TextField()
+
+    
     
 
 

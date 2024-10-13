@@ -52,22 +52,6 @@
             color: #000000; /* Dark text color for table data */
         }
 
-        .btn-danger, .btn-primary {
-            padding: 10px 20px;
-            font-size: 1.1em;
-            margin-top: 20px;
-        }
-
-        .btn-danger {
-            background-color: #dc3545;
-            border: none;
-        }
-
-        .btn-primary {
-            background-color: #107728;
-            border: none;
-        }
-
         .text-right {
             font-size: 1.5em;
             font-weight: bold;
@@ -86,76 +70,28 @@
 <body>
     <div class="container py-5">
         <h1 class="text-center">SHOPPING CART</h1>
-        <div id="cartContent"></div>
-        <div class="text-center mt-4">
-            <button class="btn btn-danger" id="clearCart" style="display: none;">Clear Cart</button>
-            <button class="btn btn-primary" id="checkout" style="display: none;">Proceed to Checkout</button>
-        </div>
-
-        <div class="text-center mt-4" id="emptyCartMessage" style="display: none;">
-            <p class='empty-cart-message'>Your cart is empty.</p>
-            <a href="{% url 'product' %}"><button class="btn btn-primary">Go to Products</button></a>
-        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Example row, replace this with dynamic rows from your JavaScript -->
+                 {% for c in cart %}
+                <tr>
+                    <td>{{ c.product_id.product_name }}</td>
+                    <td>{{c.product_id.unit_price}}</td>
+                    <td>{{ c.product_qty }}</td>
+                    <td>{{ c.product_id }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h4 class="text-right">Total Amount: Rs. {{ total_price }}</h4>
     </div>
-
-    <script>
-        // Get cart items from local storage
-        function getCartItems() {
-            return JSON.parse(localStorage.getItem("cartItems")) || [];
-        }
-
-        // Display cart items in the table
-        function displayCartItems() {
-            const cartItems = getCartItems();
-            const cartContentDiv = document.getElementById("cartContent");
-            const checkoutBtn = document.getElementById("checkout");
-            const clearCartBtn = document.getElementById("clearCart");
-            const emptyCartMessage = document.getElementById("emptyCartMessage");
-
-            if (cartItems.length === 0) {
-                cartContentDiv.innerHTML = '';
-                emptyCartMessage.style.display = "block"; // Show empty cart message
-                checkoutBtn.style.display = "none";
-                clearCartBtn.style.display = "none";  // Hide clear cart button when cart is empty
-                return;
-            }
-
-            let totalAmount = 0;
-            let cartHTML = '<table class="table table-bordered"><thead><tr><th>Product</th><th>Price</th><th>Quantity</th><th>Total</th></tr></thead><tbody>';
-
-            cartItems.forEach(item => {
-                const itemTotal = item.price * item.quantity;
-                totalAmount += itemTotal;
-                cartHTML += `<tr>
-                    <td>${item.name}</td>
-                    <td>Rs. ${item.price}</td>
-                    <td>${item.quantity}</td>
-                    <td>Rs. ${itemTotal}</td>
-                </tr>`;
-            });
-
-            cartHTML += `</tbody></table>
-                <h4 class="text-right">Total Amount: Rs. ${totalAmount}</h4>`;
-
-            cartContentDiv.innerHTML = cartHTML;
-            emptyCartMessage.style.display = "none"; // Hide empty cart message if there are items
-            checkoutBtn.style.display = "inline-block";  // Show the checkout button if cart is not empty
-            clearCartBtn.style.display = "inline-block";  // Show the clear cart button if cart is not empty
-        }
-
-        // Clear cart and redirect to product page
-        document.getElementById("clearCart").addEventListener("click", function() {
-            localStorage.removeItem("cartItems");
-            displayCartItems();
-        });
-
-        // Redirect to checkout page
-        document.getElementById("checkout").addEventListener("click", function() {
-            window.location.href = "{% url 'checkout' %}";
-        });
-
-        // Initial call to display cart items
-        displayCartItems();
-    </script>
 </body>
 </html>
