@@ -23,11 +23,17 @@ def userlogin(request):
         print(user)
         if user is not None and user.is_active:
             login(request, user)
-            return redirect(index)
-        if user is None:
+            # Check if the user is a super admin (superuser)
+            if user.is_superuser:
+                # Redirect to super admin dashboard
+                return redirect('admin_dashboard')
+            else:
+                return redirect('index')  # Redirect to user home
+        else:
             msg = "Please check the credentials carefully!"
-            return render(request, 'index.html', {'msg':msg})
-    return render(request,"userlogin.html")
+            return render(request, 'userlogin.html', {'msg': msg})
+
+    return render(request, "userlogin.html")
 
 def userreg(request):
     if request.method =="POST":
@@ -45,6 +51,10 @@ def userreg(request):
             msg = "Username already exists. Try again!"
             return render(request, 'userreg.html', {'msg':msg})
     return render(request,"userreg.html")
+
+def admindashboard(request):
+    return render(request,"admin_dashboard.html")
+    
 
 def userlogout(request):
     logout(request)
