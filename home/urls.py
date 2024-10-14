@@ -26,5 +26,3 @@ urlpatterns = [
     path('clear-cart/<int:user_id>/', clear_cart, name='clear_cart'),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
