@@ -8,10 +8,15 @@ class Product(models.Model):
     product_image = models.ImageField(upload_to='products/', blank=True, null=True)
     product_status = models.BooleanField(default=True)
     
+# class Product_cart(models.Model):
+#     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+#     product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
+#     product_qty = models.IntegerField()
+#     cart_status = models.BooleanField(default=True)
 class Product_cart(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
-    product_qty = models.IntegerField()
+    product_qty = models.IntegerField(default=1)  # Default to 1
     cart_status = models.BooleanField(default=True)
     
     

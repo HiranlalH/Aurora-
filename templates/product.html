@@ -297,10 +297,15 @@
             </div>
         </div>
     </div>
-    <center><button type="submit" class="btn btn-primary py-2 px-4"><a href="{% url 'cart' user_id=request.user.id %}" style="color:white;" onclicl="alert('Item added to cart!')">View Cart</a></button></center>
+    <center>
+        <button type="button" class="btn btn-primary py-2 px-4">
+            <a href="{% url 'cart' user_id=request.user.id %}" style="color:white; text-decoration: none;">View Cart</a>
+        </button>
+    </center>
+    
     <!-- Product End -->
 
-    <script>
+    <!-- <script>
         // Function to get cart items from localStorage or return empty array
         function getCartItems() {
             return JSON.parse(localStorage.getItem("cartItems")) || [];
@@ -358,7 +363,7 @@
             
         });
 
-    </script>
+    </script> -->
 
 
     <!-- Footer Start -->

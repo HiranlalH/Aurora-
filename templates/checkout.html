@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,12 +15,14 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            height: 100vh; /* Ensure the image covers the full height */
+            height: 100vh;
+            /* Ensure the image covers the full height */
         }
 
         /* Make the container more transparent */
         .container {
-            background-color: rgb(255, 255, 255); /* Slightly more transparent */
+            background-color: rgb(255, 255, 255);
+            /* Slightly more transparent */
             border-radius: 10px;
             padding: 20px;
         }
@@ -28,28 +31,35 @@
         table {
             border-collapse: collapse;
             width: 100%;
-            border: 2px solid black; /* Thicker borders */
+            border: 2px solid black;
+            /* Thicker borders */
         }
 
         th {
-            background-color: rgba(40, 167, 69, 0.7); /* Semi-transparent green for table headers */
+            background-color: rgba(40, 167, 69, 0.7);
+            /* Semi-transparent green for table headers */
             color: rgb(255, 255, 255);
         }
 
         td {
             font-size: 1.1em;
-            color: #000000; /* Dark text color for table data */
+            color: #000000;
+            /* Dark text color for table data */
         }
 
-        th, td {
+        th,
+        td {
             padding: 10px;
             text-align: left;
         }
-        .btn-secondary, .btn-success {
+
+        .btn-secondary,
+        .btn-success {
             padding: 10px 20px;
             font-size: 1.1em;
             margin-top: 20px;
         }
+
         .btn-secondary {
             background-color: #dc3545;
             border: none;
@@ -62,18 +72,40 @@
     </style>
 
 </head>
+
 <body>
     <div class="container py-5">
         <h1 class="text-center">Checkout</h1>
         <div id="checkoutContent"></div>
         <div class="text-center mt-4">
-            <button class="btn btn-secondary" id="backToCart" >Back to Cart</button> <!-- Back button -->
+            <button class="btn btn-secondary" id="backToCart">Back to Cart</button> <!-- Back button -->
             <button class="btn btn-success" id="proceedToPayment">Proceed to Payment</button>
-            
         </div>
     </div>
 
     <script>
+        // Store the user ID and the URL for redirection outside the click event
+        const userId = {{request.user_id}}; // Get the user ID from the Django template
+        const cartUrl = "{% url 'cart' user_id=request.user.id %}"; // Construct the cart URL
+
+        // Back to Cart
+        document.getElementById("backToCart").addEventListener("click", function () {
+            window.location.href = cartUrl; // Redirect to the cart page
+        });
+
+        // Proceed to Payment
+        document.getElementById("proceedToPayment").addEventListener("click", function () {
+            const cartItems = getCartItems();
+            if (cartItems.length > 0) {
+                const totalAmount = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                localStorage.setItem("totalAmount", totalAmount); // Save total amount to localStorage
+                window.location.href = "{% url 'payment' %}"; // Redirect to the payment page
+            } else {
+                alert("Your cart is empty!");
+            }
+        });
+
+        // Function to get cart items and display them
         function getCartItems() {
             return JSON.parse(localStorage.getItem("cartItems")) || [];
         }
@@ -94,38 +126,27 @@
                 const itemTotal = item.price * item.quantity;
                 totalAmount += itemTotal;
                 checkoutHTML += `<tr>
-                    <td>${item.name}</td>
-                    <td>Rs. ${item.price}</td>
-                    <td>${item.quantity}</td>
-                    <td>Rs. ${itemTotal}</td>
-                </tr>`;
+                        <td>${item.name}</td>
+                        <td>Rs. ${item.price}</td>
+                        <td>${item.quantity}</td>
+                        <td>Rs. ${itemTotal}</td>
+                    </tr>`;
             });
 
             checkoutHTML += `</tbody></table>
-                <h4 class="text-right">Total Amount: Rs. ${totalAmount}</h4>`;
+                    <h4 class="text-right">Total Amount: Rs. ${totalAmount}</h4>`;
 
             checkoutContentDiv.innerHTML = checkoutHTML;
         }
 
-        // Back to Cart
-        document.getElementById("backToCart").addEventListener("click", function() {
-            window.location.href = "{% url 'cart' %}"; // Redirect to the cart page
-        });
-
-        // Proceed to Payment
-        document.getElementById("proceedToPayment").addEventListener("click", function() {
-            const cartItems = getCartItems();
-            if (cartItems.length > 0) {
-                const totalAmount = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-                localStorage.setItem("totalAmount", totalAmount); // Save total amount to localStorage
-                window.location.href = "{% url 'payment' %}"; // Redirect to the payment page
-            } else {
-                alert("Your cart is empty!");
-            }
-        });
-
         // Display checkout items on page load
         displayCheckoutItems();
     </script>
+
+
+    // Display checkout items on page load
+    displayCheckoutItems();
+
 </body>
+
 </html>
