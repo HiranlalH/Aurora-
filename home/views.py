@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from .models import Product, Product_cart, Feedback, Contact
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
@@ -63,7 +65,16 @@ def blog(request):
     return render(request,"blog.html")
 
 def contact(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+        ctat = Contact.objects.create(name = name, email = email, subject = subject, message = message)
+        ctat.save()
+        return render(request, 'contact.html')
     return render(request,"contact.html")
+
 
 def feature(request):
     return render(request,"feature.html")
@@ -71,26 +82,71 @@ def feature(request):
 def Prediction(request):
     return render(request,"Prediction.html")
 
-def product(request):
-    return render(request,"product.html")
+def products(request):
+    products = Product.objects.all()
+    return render(request, "product.html", {'products': products})
+
+def add_to_cart(request, p_id):
+    user = request.user
+    product = Product.objects.get(id = p_id)
+    if Product_cart.objects.filter(user_id = user).exists():
+        if Product_cart.objects.filter(product_id = product).exists():
+            crt = Product_cart.objects.get(user_id = user, product_id = product)
+            crt.product_qty += 1
+            crt.save()
+            return redirect(products)
+        elif not Product_cart.objects.filter(product_id = product).exists():
+            crt = Product_cart.objects.create(user_id = user, product_id = product, product_qty = 1, cart_status = True)
+            crt.save()
+            return redirect(products)
+    crt = Product_cart.objects.create(user_id = user, product_id = product, product_qty = 1, cart_status = True)
+    crt.save()
+    return redirect(products)
+    
+    
+    return redirect(products)
+    
+            
+        
+    
 
 def testimonial(request):
     return render(request,"testimonial.html")
 
 def feedback(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        rating = request.POST.get('rating')
+        comments = request.POST.get('comments')
+        feedbk = Feedback.objects.create(name = name, email = email, rating = rating, comments = comments)
+        feedbk.save()
+        return render(request, 'feedback.html')
     return render(request,"feedback.html")
 
 def payment(request):
     return render(request,"payment.html")
 
-def cart(request):
-    return render(request,"cart.html")
+def cart(request, user_id):
+    cart = Product_cart.objects.filter(user_id = user_id)
+    total_price = 0
+    # item_total = {}
+    item_total = []
+    for i in cart:
+        t_price = i.product_id.unit_price * i.product_qty
+        # item_total[i.id] = t_price
+        item_total.append(t_price)
+        total_price += i.product_id.unit_price * i.product_qty
+        # print(item_total)
+    return render(request,"cart.html", {'cart' : cart, 'total_price' : total_price, "item_total" : item_total})
+
 
 def checkout(request):
     return render(request,"checkout.html")
 
 def confirmation(request):
     return render(request,"confirmation.html")
+
 
 
 def cart_view(request):
