@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import index,error,about,blog,contact,feature,Prediction,product,testimonial,userlogin,userlogout,userreg,feedback,cart,checkout,payment,confirmation
+from .views import *
+# from django import settings
 
 urlpatterns = [
     path('', index, name='index'),
@@ -23,5 +24,3 @@ urlpatterns = [
     path('add_to_cart/<int:p_id>', add_to_cart, name="add_to_cart")
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
