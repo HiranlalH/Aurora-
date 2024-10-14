@@ -46,7 +46,8 @@
 
         <div class="payment-option text-center">
             <h3>Pay Using Card</h3>
-            <form id="cardPaymentForm">
+            <form id="cardPaymentForm" action="{% url 'confirmation' %}" method="POST">
+                {% csrf_token %}
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Card Number" id="cardNumber" required pattern="\d{16}" title="Please enter a valid card number (16 digits)">
                 </div>
@@ -62,34 +63,5 @@
             </form>
         </div>
     </div>
-
-    <script>
-        // Handle card payment form submission
-        document.getElementById("cardPaymentForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent the default form submission
-            
-            const cardNumber = document.getElementById("cardNumber").value;
-            const expiryDate = document.getElementById("expiryDate").value;
-            const cvv = document.getElementById("cvv").value;
-
-            // Validate fields
-            if (!/^\d{16}$/.test(cardNumber)) {
-                alert("Please enter a valid card number (16 digits).");
-                return;
-            }
-            if (!/^(0[1-9]|1[0-2])\/[0-9]{4}$/.test(expiryDate)) {
-                alert("Please enter a valid expiry date (MM/YYYY).");
-                return;
-            }
-            if (!/^\d{3}$/.test(cvv)) {
-                alert("Please enter a valid CVV (3 digits).");
-                return;
-            }
-
-            // If all validations pass
-            alert("Payment successful!"); // You can display a success message here
-            window.location.href = "{% url 'confirmation' %}"; // Redirect to confirmation page
-        });
-    </script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index,error,about,blog,contact,feature,Prediction,products,testimonial,userlogin,userlogout,userreg,feedback,cart,checkout,payment,confirmation, add_to_cart
+from .views import *
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -17,11 +17,12 @@ urlpatterns = [
     path('product/',products,name='product'),
     path('testimonial/',testimonial,name='testimonial'),
     path('feedback/',feedback,name='feedback'),
-    path('cart/<int:user_id>',cart,name='cart'),
-    path('checkout/',checkout,name='checkout'),
+    path('checkout/<int:user_id>/', checkout, name='checkout'), 
     path('payment/',payment,name='payment'),
     path('confirmation/',confirmation,name='confirmation'),
-    path('add_to_cart/<int:p_id>', add_to_cart, name="add_to_cart")
+    path('add_to_cart/<int:p_id>', add_to_cart, name="add_to_cart"),
+    path('cart/<int:user_id>/', cart, name='cart'),  # Ensure user_id is part of the path
+    path('clear-cart/<int:user_id>/', clear_cart, name='clear_cart'),
 ]
 
 if settings.DEBUG:

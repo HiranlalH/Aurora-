@@ -95,43 +95,43 @@
 
 
 
-const cart = [];
-const cartItemsContainer = document.getElementById('cart-items');
-const cartCount = document.getElementById('cart-count');
-const cartTotal = document.getElementById('cart-total');
-const checkoutBtn = document.getElementById('checkout-btn');
+// const cart = [];
+// const cartItemsContainer = document.getElementById('cart-items');
+// const cartCount = document.getElementById('cart-count');
+// const cartTotal = document.getElementById('cart-total');
+// const checkoutBtn = document.getElementById('checkout-btn');
 
 // Add to Cart Button Functionality
-document.querySelectorAll('.add-to-cart').forEach(button => {
-    button.addEventListener('click', (event) => {
-        const product = event.target.closest('.product');
-        const productName = product.getAttribute('data-name');
-        const productPrice = parseFloat(product.getAttribute('data-price'));
-        addToCart(productName, productPrice);
-    });
-});
+// document.querySelectorAll('.add-to-cart').forEach(button => {
+//     button.addEventListener('click', (event) => {
+//         const product = event.target.closest('.product');
+//         const productName = product.getAttribute('data-name');
+//         const productPrice = parseFloat(product.getAttribute('data-price'));
+//         addToCart(productName, productPrice);
+//     });
+// });
 
 // Function to Add Item to Cart
-function addToCart(name, price) {
-    cart.push({ name, price });
-    updateCart();
-}
+// function addToCart(name, price) {
+//     cart.push({ name, price });
+//     updateCart();
+// }
 
 // Function to Update Cart
-function updateCart() {
-    cartItemsContainer.innerHTML = '';
-    let total = 0;
+// function updateCart() {
+//     cartItemsContainer.innerHTML = '';
+//     let total = 0;
 
-    cart.forEach(item => {
-        const li = document.createElement('li');
-        li.textContent = `${item.name} - $${item.price.toFixed(2)}`;
-        cartItemsContainer.appendChild(li);
-        total += item.price;
-    });
+//     cart.forEach(item => {
+//         const li = document.createElement('li');
+//         li.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+//         cartItemsContainer.appendChild(li);
+//         total += item.price;
+//     });
 
-    cartCount.textContent = cart.length;
-    cartTotal.textContent = total.toFixed(2);
-}
+//     cartCount.textContent = cart.length;
+//     cartTotal.textContent = total.toFixed(2);
+// }
 
 // Checkout Button Functionality (Redirect to Payment Gateway)
 checkoutBtn.addEventListener('click', () => {

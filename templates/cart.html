@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,7 +38,8 @@
             margin-top: 20px;
         }
 
-        th, td {
+        th,
+        td {
             text-align: center;
             padding: 15px;
         }
@@ -65,33 +67,76 @@
             text-align: center;
             margin-top: 50px;
         }
+
+        .btn-danger,
+        .btn-primary {
+            padding: 10px 20px;
+            font-size: 1.1em;
+            margin-top: 20px;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: #107728;
+            border: none;
+        }
     </style>
 </head>
+
 <body>
     <div class="container py-5">
         <h1 class="text-center">SHOPPING CART</h1>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Total Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Example row, replace this with dynamic rows from your JavaScript -->
-                 {% for c in cart %}
-                <tr>
-                    <td>{{ c.product_id.product_name }}</td>
-                    <td>{{c.product_id.unit_price}}</td>
-                    <td>{{ c.product_qty }}</td>
-                    <td>{{ c.product_id }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <h4 class="text-right">Total Amount: Rs. {{ total_price }}</h4>
+
+        {% if cart %}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart %}
+            <tr>
+                <td>{{ item.product_name }}</td>
+                <td>Rs. {{ item.unit_price }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>Rs. {{ item.total_price }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h4 class="text-right">Total Amount: Rs. {{ total_price }}</h4>
+    
+    <div class="text-center mt-4">
+        <form action="{% url 'clear_cart' user_id=request.user.id %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to clear the cart?');">Clear Cart</button>
+        </form>
+        
+        <form action="{% url 'checkout' user_id=request.user.id %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Proceed to Checkout</button>
+        </form>
+        
+    </div>
+{% else %}
+    <div class="empty-cart-message">
+        Your cart is currently empty. Start adding products to your cart!
+    </div>
+    <div class="text-center mt-4">
+        <a href="{% url 'product' %}" class="btn btn-primary">Go to Products Page</a>
+    </div>
+{% endif %}
+
+
     </div>
 </body>
+
 </html>
