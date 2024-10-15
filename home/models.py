@@ -8,6 +8,7 @@ class Product(models.Model):
     product_image = models.ImageField(upload_to='products/', blank=True, null=True)
     product_status = models.BooleanField(default=True)
     
+    
 class Product_cart(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     product_id = models.ForeignKey(Product, on_delete=models.CASCADE)

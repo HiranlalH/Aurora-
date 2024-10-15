@@ -75,78 +75,45 @@
 
 <body>
     <div class="container py-5">
-        <h1 class="text-center">Checkout</h1>
-        <div id="checkoutContent"></div>
-        <div class="text-center mt-4">
-            <button class="btn btn-secondary" id="backToCart">Back to Cart</button> <!-- Back button -->
-            <button class="btn btn-success" id="proceedToPayment">Proceed to Payment</button>
-        </div>
+        <h1 class="text-center">CHECKOUT</h1>
+
+        
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart %}
+            <tr>
+                <td>{{ item.product_name }}</td>
+                <td>Rs. {{ item.unit_price }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>Rs. {{ item.item_total}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h4 class="text-right">Total Amount: Rs. {{ total_amount }}</h4>
+    
+    <div class="text-center mt-4">
+        <form action="{% url 'cart' %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Back To Cart</button>
+        </form>
+        
+        <form action="{% url 'payment' %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Proceed to Payement</button>
+        </form>
+        
     </div>
 
-    <script>
-        // Store the user ID and the URL for redirection outside the click event
-        const userId = {{request.user_id}}; // Get the user ID from the Django template
-        const cartUrl = "{% url 'cart' user_id=request.user.id %}"; // Construct the cart URL
 
-        // Back to Cart
-        document.getElementById("backToCart").addEventListener("click", function () {
-            window.location.href = cartUrl; // Redirect to the cart page
-        });
-
-        // Proceed to Payment
-        document.getElementById("proceedToPayment").addEventListener("click", function () {
-            const cartItems = getCartItems();
-            if (cartItems.length > 0) {
-                const totalAmount = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-                localStorage.setItem("totalAmount", totalAmount); // Save total amount to localStorage
-                window.location.href = "{% url 'payment' %}"; // Redirect to the payment page
-            } else {
-                alert("Your cart is empty!");
-            }
-        });
-
-        // Function to get cart items and display them
-        function getCartItems() {
-            return JSON.parse(localStorage.getItem("cartItems")) || [];
-        }
-
-        function displayCheckoutItems() {
-            const cartItems = getCartItems();
-            const checkoutContentDiv = document.getElementById("checkoutContent");
-
-            if (cartItems.length === 0) {
-                checkoutContentDiv.innerHTML = "<p>Your cart is empty.</p>";
-                return;
-            }
-
-            let totalAmount = 0;
-            let checkoutHTML = '<table class="table table-bordered"><thead><tr><th>Product</th><th>Price</th><th>Quantity</th><th>Total</th></tr></thead><tbody>';
-
-            cartItems.forEach(item => {
-                const itemTotal = item.price * item.quantity;
-                totalAmount += itemTotal;
-                checkoutHTML += `<tr>
-                        <td>${item.name}</td>
-                        <td>Rs. ${item.price}</td>
-                        <td>${item.quantity}</td>
-                        <td>Rs. ${itemTotal}</td>
-                    </tr>`;
-            });
-
-            checkoutHTML += `</tbody></table>
-                    <h4 class="text-right">Total Amount: Rs. ${totalAmount}</h4>`;
-
-            checkoutContentDiv.innerHTML = checkoutHTML;
-        }
-
-        // Display checkout items on page load
-        displayCheckoutItems();
-    </script>
-
-
-    // Display checkout items on page load
-    displayCheckoutItems();
-
+    </div>
 </body>
-
 </html>

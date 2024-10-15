@@ -6,7 +6,6 @@ from django.contrib import messages
 
 
 
-# Create your views here.
 def index(request):
     return render(request,"index.html")
 
@@ -52,14 +51,13 @@ def userreg(request):
             return render(request, 'userreg.html', {'msg':msg})
     return render(request,"userreg.html")
 
-def admindashboard(request):
-    return render(request,"admin_dashboard.html")
-    
-
 def userlogout(request):
     logout(request)
     return redirect('userlogin')
 
+def admindashboard(request):
+    return render(request,"admin_dashboard.html")
+    
 def about(request):
     return render(request,"about.html")
     
@@ -88,41 +86,85 @@ def products(request):
     products = Product.objects.all()
     return render(request, "product.html", {'products': products})
 
-# def add_to_cart(request, p_id):
-#     user = request.user
-#     product = Product.objects.get(id = p_id)
-#     if Product_cart.objects.filter(user_id = user).exists():
-#         if Product_cart.objects.filter(product_id = product).exists():
-#             crt = Product_cart.objects.get(user_id = user, product_id = product)
-#             crt.product_qty += 1
-#             crt.save()
-#             return redirect(products)
-#         elif not Product_cart.objects.filter(product_id = product).exists():
-#             crt = Product_cart.objects.create(user_id = user, product_id = product, product_qty = 1, cart_status = True)
-#             crt.save()
-#             return redirect(products)
-#     crt = Product_cart.objects.create(user_id = user, product_id = product, product_qty = 1, cart_status = True)
-#     crt.save()
-#     return redirect(products)
 def add_to_cart(request, p_id):
     user = request.user
-    product = get_object_or_404(Product, id=p_id)  # Safely get the product or return 404
+    product = Product.objects.get(id = p_id)
+    if Product_cart.objects.filter(user_id = user).exists():
+        if Product_cart.objects.filter(product_id = product).exists():
+            crt = Product_cart.objects.get(user_id = user, product_id = product)
+            crt.product_qty += 1
+            crt.save()
+            return redirect(products)
+        elif not Product_cart.objects.filter(product_id = product).exists():
+            crt = Product_cart.objects.create(user_id = user, product_id = product, product_qty = 1, cart_status = True)
+            crt.save()
+            return redirect(products)
+    crt = Product_cart.objects.create(user_id = user, product_id = product, product_qty = 1, cart_status = True)
+    crt.save()
+    return redirect(products)
 
-    # Get or create the cart item for this user and product
-    cart_item, created = Product_cart.objects.get_or_create(
-        user_id=user,
-        product_id=product,
-        defaults={'product_qty': 1, 'cart_status': True}
-    )
 
-    if not created:
-        # If the cart item already exists, increase the quantity
-        cart_item.product_qty += 1
-        cart_item.save()
+def cart(request):
+    # Retrieve the cart items for the user
+    cart = Product_cart.objects.filter(user_id=request.user)
+    total_amount = 0
+    cart_data = []
+    for item in cart:
+        item_total = item.product_id.unit_price * item.product_qty
+        cart_data.append({
+            'product_name': item.product_id.product_name,
+            'unit_price': item.product_id.unit_price,
+            'quantity': item.product_qty,
+            'item_total': item_total,
+        })
+        total_amount += item_total
 
-    return redirect('product')  # Ensure 'products' is a valid URL name
-            
-    
+    return render(request, 'cart.html', {
+        'cart': cart_data,
+        'total_amount': total_amount,
+    })
+
+def checkout(request):
+    cart = Product_cart.objects.filter(user_id=request.user)
+    total_amount = 0
+    cart_data = []
+    for item in cart:
+        item_total = item.product_id.unit_price * item.product_qty
+        cart_data.append({
+            'product_name': item.product_id.product_name,
+            'unit_price': item.product_id.unit_price,
+            'quantity': item.product_qty,
+            'item_total': item_total,
+        })
+        total_amount += item_total
+
+    return render(request, 'checkout.html', {
+        'cart': cart_data,
+        'total_amount': total_amount,
+    })
+
+def payment(request):
+    cart = Product_cart.objects.filter(user_id=request.user)
+    total_amount = 0
+    cart_data = []
+    for item in cart:
+        item_total = item.product_id.unit_price * item.product_qty
+        cart_data.append({
+            'product_name': item.product_id.product_name,
+            'unit_price': item.product_id.unit_price,
+            'quantity': item.product_qty,
+            'item_total': item_total,
+        })
+        total_amount += item_total
+    return render(request,"payment.html",{'total_amount':total_amount})
+
+def confirmation(request):
+    return render(request,"confirmation.html")
+
+def cart_display_view(request):
+    cart_items = request.session.get('cart_items', {})
+    return render(request, 'cart.html', {'cart_items': cart_items})
+  
 
 def testimonial(request):
     return render(request,"testimonial.html")
@@ -138,28 +180,13 @@ def feedback(request):
         return render(request, 'feedback.html')
     return render(request,"feedback.html")
 
-def payment(request):
-    return render(request,"payment.html")
 
-def cart(request, user_id):
-    # Retrieve the cart items for the user
-    cart_items = request.session.get('cart', [])
-    total_price = sum(item['total_price'] for item in cart_items)  # Calculate total price
+def clear_cart(request, user_id):
+    data = Product_cart.objects.filter(user_id=request.user)
+    data.delete()
 
-    context = {
-        'cart': cart_items,
-        'total_price': total_price,
-    }
-    return render(request, 'cart.html', context)
+    return redirect('cart')  # Redirect back to the cart page (make sure 'cart' is defined in your urls)
 
-
-def checkout(request, user_id):
-    user = get_object_or_404(User, id=user_id)
-    # Process checkout logic here
-    return render(request, 'checkout.html', {'user': user})
-
-def confirmation(request):
-    return render(request,"confirmation.html")
 
 
 
@@ -184,9 +211,7 @@ def confirmation(request):
 
 #     return render(request, 'cart.html')
 
-def cart_display_view(request):
-    cart_items = request.session.get('cart_items', {})
-    return render(request, 'cart.html', {'cart_items': cart_items})
+
 
 # def clear_cart(request, user_id):
 #     products = Product_cart.objects.filter(user_id = user_id)
@@ -196,13 +221,6 @@ def cart_display_view(request):
 #         product.save()
 #     return redirect(cart, usr.id)
 
-def clear_cart(request, user_id):
-    # Clear the cart logic, e.g., clearing session data
-    request.session['cart'] = []  # Example for session-based cart
 
-    # You might also want to reset total_price if you're calculating it based on the cart
-    request.session['total_price'] = 0
-
-    return redirect('cart')  # Redirect back to the cart page (make sure 'cart' is defined in your urls)
 
 
