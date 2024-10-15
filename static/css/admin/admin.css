@@ -3,11 +3,12 @@ body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  background-color: rgba(15, 15, 45, 0.7); /* Semi-transparent background */
+  background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent background */
   color: #fff;
   backdrop-filter: blur(10px); /* Blurs the background behind the body */
   -webkit-backdrop-filter: blur(10px); /* For Safari */
   border: 1px solid rgba(255, 255, 255, 0.1); /* Optional: subtle border for effect */
+  
 }
 
 
@@ -20,10 +21,12 @@ body {
   background-color: #1b1b38;
   padding: 20px;
   height: 100vh;
+  
 }
 
 .sidebar .logo {
   margin-bottom: 50px;
+  
 }
 
 .sidebar h2 {
@@ -32,11 +35,15 @@ body {
 
 .sidebar-menu {
   list-style-type: none;
-  padding: 0;
+  padding: 20px;
+  
 }
+
+
 
 .sidebar-menu li {
   margin: 20px 0;
+  
 }
 
 .sidebar-menu li a {
@@ -64,7 +71,8 @@ body {
 .main-content {
   flex: 1;
   padding: 20px;
-  background-color: #121227;
+  background-color: #ffffff;
+  
 }
 
 .top-bar {
@@ -92,7 +100,7 @@ body {
 }
 
 .sales-overview .card {
-  background-color: #1f1f46;
+  background-color: #dedee7;
   padding: 20px;
   border-radius: 10px;
   text-align: center;
@@ -151,13 +159,13 @@ body {
 .customer-table table th, .customer-table table td {
   padding: 15px;
   text-align: left;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid #e3dbdb;
 }
 
 .customer-table table th {
-  background-color: #25254a;
+  background-color: #e6e6f5;
 }
 
 .customer-table table tr:hover {
-  background-color: #333;
+  background-color: #d3d0d0;
 }

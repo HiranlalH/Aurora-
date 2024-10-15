@@ -16,7 +16,6 @@
         margin: 0;
         padding: 0;
         font-family: Arial, sans-serif;
-        background-color: #050505;
         color: #121111;
         
     }
@@ -27,7 +26,7 @@
 
     .sidebar {
         width: 250px;
-        background-color: #098672;
+        background-color: #056b11;
         padding: 20px;
         height: 100vh;
     }
@@ -37,12 +36,17 @@
     }
 
     .sidebar h2 {
-        color: #0f0e0e;
+        color: #edebeb;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
 
     .sidebar-menu {
         list-style-type: none;
         padding: 0;
+        h2 {
+  font-size: 30px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
     }
 
     .sidebar-menu li {
@@ -63,19 +67,34 @@
     }
 
     .sidebar-menu li a:hover {
-        color: #080603;
+        color: #362914;
     }
 
     .sidebar-menu .active a {
         color: #0a0806;
+    
     }
 
     /* Main content styles */
     .main-content {
-        flex: 1;
-        padding: 20px;
-        background-color: #030303;
-    }
+    flex: 1;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.2); /* Semi-transparent layer for glass effect */
+    backdrop-filter: blur(10px); /* Adds blur to the background */
+    -webkit-backdrop-filter: blur(10px); /* For Safari support */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Light border for glass look */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    border-radius: 10px; /* Rounded corners */
+    color: #333; /* Text color */
+    
+    /* Background image */
+    background-image: url({% static 'img/Eco friendly cosmetics decorated with green leaves organic facial skincare makeup and skin care _ Premium AI-generated image.jpeg' %}); /* Replace with your image URL */
+    background-size: cover; /* Makes sure the image covers the entire background */
+    background-position: center; /* Centers the background image */
+}
+
+
+
 
     .top-bar {
         display: flex;
@@ -86,6 +105,7 @@
 
     .top-bar h1 {
         font-size: 28px;
+        color: white;
     }
 
     .search-bar {
@@ -132,7 +152,7 @@
 
     .chart-card {
         width: 48%;
-        background-color: #056b11;
+        background-color: #fefffee4;
         padding: 20px;
         border-radius: 10px;
     }
@@ -144,7 +164,7 @@
 
     .customer-table {
         margin-top: 40px;
-        background-color: #056b11;
+        background-color: #fefffee4;
         padding: 20px;
         border-radius: 10px;
     }
@@ -179,14 +199,14 @@
         <!-- Sidebar Navigation -->
         <aside class="sidebar">
             <div class="logo">
-                <h2>Sales Management</h2>
+                <h2> Sales Management</h2>
             </div>
             <ul class="sidebar-menu">
-                <li class="active"><a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                <li><a href="#"><i class="fas fa-user"></i> Profile</a></li>
-                <li><a href="#"><i class="fas fa-chart-bar"></i> Sales Report</a></li>
-                <li><a href="#"><i class="fas fa-cogs"></i> Settings</a></li>
-                <li><a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                <li class="active"><a href="#" style="color:white; padding-top: 50px; font-size: 200%; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="#" style="color:white; padding-top: 50px; font-size: 150%; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"><i class="fas fa-user"></i> Profile</a></li>
+                <li><a href="#"style="color:white; padding-top: 50px; font-size: 150%; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"><i class="fas fa-chart-bar"></i> Sales Report</a></li>
+                <li><a href="#"style="color:white; padding-top: 50px; font-size: 150%; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"><i class="fas fa-cogs"></i> Settings</a></li>
+                <li><a href="#"style="color:white; padding-top: 50px; font-size: 150%; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>
         </aside>
 
@@ -201,23 +221,23 @@
             <div class="sales-overview">
                 <div class="card">
                     <h3>Total Sales</h3>
-                    <p>$5K</p>
-                    <span>+10% from yesterday</span>
+                    <p>$0K</p>
+                    <span>0% from yesterday</span>
                 </div>
                 <div class="card">
                     <h3>Total Orders</h3>
-                    <p>500</p>
-                    <span>+4% from yesterday</span>
+                    <p>000</p>
+                    <span>+0% from yesterday</span>
                 </div>
                 <div class="card">
                     <h3>Product Sold</h3>
-                    <p>9</p>
-                    <span>+2% from yesterday</span>
+                    <p>0</p>
+                    <span>0% from yesterday</span>
                 </div>
                 <div class="card">
                     <h3>New Customers</h3>
-                    <p>12</p>
-                    <span>+3% from yesterday</span>
+                    <p>0</p>
+                    <span>+0% from yesterday</span>
                 </div>
             </div>
 
@@ -272,7 +292,7 @@
 
     <!-- Include Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/admin/script.js' %}"></script>
 </body>
 
 </html>
