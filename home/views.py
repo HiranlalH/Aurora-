@@ -90,8 +90,8 @@ def add_to_cart(request, p_id):
     user = request.user
     product = Product.objects.get(id = p_id)
     if Product_cart.objects.filter(user_id = user).exists():
-        if Product_cart.objects.filter(product_id = product).exists():
-            crt = Product_cart.objects.get(user_id = user, product_id = product)
+        if Product_cart.objects.filter(user_id = request.user,product_id = product).exists():
+            crt = Product_cart.objects.filter(user_id = request.user, product_id = product).first()
             crt.product_qty += 1
             crt.save()
             return redirect(products)
@@ -184,14 +184,26 @@ def testimonial(request):
 
 def feedback(request):
     if request.method == "POST":
+        # Get form data from POST request
         name = request.POST.get('name')
         email = request.POST.get('email')
         rating = request.POST.get('rating')
         comments = request.POST.get('comments')
-        feedbk = Feedback.objects.create(name = name, email = email, rating = rating, comments = comments)
+
+        # Create a Feedback object and save it to the database
+        feedbk = Feedback.objects.create(
+            name=name,
+            email=email,
+            rating=rating,
+            comments=comments
+        )
         feedbk.save()
-        return render(request, 'feedback.html')
-    return render(request,"feedback.html")
+
+        # After saving, return the template with a success message
+        return render(request, 'feedback.html', {'success': True})
+    
+    # Render the form if not a POST request
+    return render(request, "feedback.html")
 
 
 def clear_cart(request, user_id):
