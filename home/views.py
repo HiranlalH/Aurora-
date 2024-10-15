@@ -158,7 +158,20 @@ def payment(request):
         total_amount += item_total
     return render(request,"payment.html",{'total_amount':total_amount})
 
+
 def confirmation(request):
+    cart = Product_cart.objects.filter(user_id=request.user)
+    total_amount = 0
+    cart_data = []
+    for item in cart:
+        item_total = item.product_id.unit_price * item.product_qty
+        cart_data.append({
+            'product_name': item.product_id.product_name,
+            'unit_price': item.product_id.unit_price,
+            'quantity': item.product_qty,
+            'item_total': item_total,
+        })
+        total_amount += item_total
     return render(request,"confirmation.html")
 
 def cart_display_view(request):
