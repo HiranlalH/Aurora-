@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  background-color: rgba(15, 15, 45, 0.7); /* Semi-transparent background */
+  background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent background */
   color: #fff;
   backdrop-filter: blur(10px); /* Blurs the background behind the body */
   -webkit-backdrop-filter: blur(10px); /* For Safari */
@@ -71,7 +71,7 @@ body {
 .main-content {
   flex: 1;
   padding: 20px;
-  background-color: #121227;
+  background-color: #ffffff;
   
 }
 
@@ -100,7 +100,7 @@ body {
 }
 
 .sales-overview .card {
-  background-color: #1f1f46;
+  background-color: #dedee7;
   padding: 20px;
   border-radius: 10px;
   text-align: center;
