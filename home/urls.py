@@ -24,6 +24,8 @@ urlpatterns = [
     path('add_to_cart/<int:p_id>', add_to_cart, name="add_to_cart"),
     path('cart', cart, name='cart'),  # Ensure user_id is part of the path
     path('clear_cart/<int:user_id>/', clear_cart, name='clear_cart'),
+    path('download_invoice/<int:user_id>/', download_invoice, name='download_invoice'),
+    
 ]
 
 if settings.DEBUG:

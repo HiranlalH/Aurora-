@@ -13,6 +13,7 @@ class Product_cart(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
     product_qty = models.IntegerField(default=1)  # Default to 1
+    product_total = models.IntegerField(default=0, null=True)
     cart_status = models.BooleanField(default=True)
     
     

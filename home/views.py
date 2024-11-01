@@ -1,8 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .models import Product, Product_cart, Feedback, Contact
 from django.contrib import messages
+from reportlab.lib.pagesizes import A4
+from reportlab.pdfgen import canvas
+from io import BytesIO
 
 
 
@@ -93,13 +97,14 @@ def add_to_cart(request, p_id):
         if Product_cart.objects.filter(user_id = request.user,product_id = product).exists():
             crt = Product_cart.objects.filter(user_id = request.user, product_id = product).first()
             crt.product_qty += 1
+            crt.product_total = crt.product_qty*product.unit_price
             crt.save()
             return redirect(products)
         elif not Product_cart.objects.filter(product_id = product).exists():
             crt = Product_cart.objects.create(user_id = user, product_id = product, product_qty = 1, cart_status = True)
             crt.save()
             return redirect(products)
-    crt = Product_cart.objects.create(user_id = user, product_id = product, product_qty = 1, cart_status = True)
+    crt = Product_cart.objects.create(user_id = user, product_id = product, product_qty = 1, product_total = product.unit_price, cart_status = True)
     crt.save()
     return redirect(products)
 
@@ -161,18 +166,8 @@ def payment(request):
 
 def confirmation(request):
     cart = Product_cart.objects.filter(user_id=request.user)
-    total_amount = 0
-    cart_data = []
-    for item in cart:
-        item_total = item.product_id.unit_price * item.product_qty
-        cart_data.append({
-            'product_name': item.product_id.product_name,
-            'unit_price': item.product_id.unit_price,
-            'quantity': item.product_qty,
-            'item_total': item_total,
-        })
-        total_amount += item_total
-    return render(request,"confirmation.html")
+    
+    return render(request,"confirmation.html", {'cart': cart})
 
 def cart_display_view(request):
     cart_items = request.session.get('cart_items', {})
@@ -205,47 +200,54 @@ def feedback(request):
     # Render the form if not a POST request
     return render(request, "feedback.html")
 
+def download_invoice(request, user_id):
+    # Create a response object with PDF content type
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="invoice.pdf"'
+
+    # Create a buffer to hold the PDF data
+    buffer = BytesIO()
+    p = canvas.Canvas(buffer, pagesize=A4)
+
+    # Fetch cart data from session or database as needed
+    cart = Product_cart.objects.filter(user_id = user_id) # Assuming cart data is stored in session
+    print(cart)
+
+    # Draw static text headers for the invoice
+    p.drawString(100, 800, "AURORA - Invoice")
+    p.drawString(100, 780, "Thank you for your order!")
+
+    # Table headers
+    p.drawString(100, 750, "Product")
+    p.drawString(250, 750, "Unit Price")
+    p.drawString(350, 750, "Quantity")
+    p.drawString(450, 750, "Total Price")
+
+    # Draw each item from the cart with dynamic data
+    y_position = 730
+    for item in cart:
+        p.drawString(100, y_position, item.product_id.product_name)
+        p.drawString(250, y_position, f"Rs. {item.product_id.unit_price}")
+        p.drawString(350, y_position, str(item.product_qty))
+        p.drawString(450, y_position, f"Rs. {item.product_total}")
+        y_position -= 20
+
+    # Finish the PDF and close it
+    p.showPage()
+    p.save()
+
+    # Get the PDF content from the buffer
+    pdf = buffer.getvalue()
+    buffer.close()
+
+    # Write the PDF content to the response
+    response.write(pdf)
+    return response
+
 
 def clear_cart(request, user_id):
     data = Product_cart.objects.filter(user_id=request.user)
     data.delete()
 
     return redirect('cart')  # Redirect back to the cart page (make sure 'cart' is defined in your urls)
-
-
-
-
-# def cart_view(request):
-#     if request.method == 'POST':
-#         cart_items = {}
-#         body_lotion_qty = int(request.POST.get('body_lotion', 0))
-#         if body_lotion_qty > 0:
-#             cart_items['Body Lotion'] = {'qty': body_lotion_qty, 'price': 500}
-
-#         # Repeat for other products
-#         face_cream_qty = int(request.POST.get('face_cream', 0))
-#         if face_cream_qty > 0:
-#             cart_items['Face Cream'] = {'qty': face_cream_qty, 'price': 410}
-
-#         # Add more products similarly...
-
-#         # Save cart_items in session or pass to context
-#         request.session['cart_items'] = cart_items
-        
-#         return redirect('cart_display')  # Redirect to the cart display page
-
-#     return render(request, 'cart.html')
-
-
-
-# def clear_cart(request, user_id):
-#     products = Product_cart.objects.filter(user_id = user_id)
-#     usr = User.objects.get(id = user_id)
-#     for product in products:
-#         product.cart_status = False
-#         product.save()
-#     return redirect(cart, usr.id)
-
-
-
 

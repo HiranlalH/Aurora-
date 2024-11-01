@@ -87,16 +87,16 @@
             <tbody>
                 {% for item in cart %}
                 <tr>
-                    <td>{{ item.product_name }}</td>
-                    <td>Rs. {{ item.unit_price }}</td>
-                    <td>{{ item.quantity }}</td>
-                    <td>Rs. {{ item.item_total}}</td>
+                    <td>{{ item.product_id.product_name }}</td>
+                    <td>Rs. {{ item.product_id.unit_price }}</td>
+                    <td>{{ item.product_qty }}</td>
+                    <td>Rs. {{ item.product_total }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
         <div>
-            <form action="{% url 'index'  %}" method="post" style="display:inline;">
+            <form action="{% url 'download_invoice' user_id=user.id  %}" method="post" style="display:inline;">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-primary">Download Invoice</button>
             </form>
