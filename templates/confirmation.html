@@ -110,6 +110,11 @@
                 <button type="submit" class="btn btn-primary">Return To Home</button>
             </form>
 
+            <form action="{% url 'trackshipment'  %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Click here to Track the item</button>
+            </form>
+
         </div>    
     </div>
 
