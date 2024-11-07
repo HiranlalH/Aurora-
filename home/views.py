@@ -8,6 +8,8 @@ from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 from io import BytesIO
 from django.utils import timezone
+from django.db.models import Sum
+
 
 
 
@@ -60,8 +62,73 @@ def userlogout(request):
     logout(request)
     return redirect('userlogin')
 
+# def admindashboard(request):
+#     sold_products = CartItems.objects.filter(cart__order__status='completed').values('product_id').annotate(total_qty_sold=Sum('total'))
+#     users = User.objects.all()
+#     shipment_details = Shipment.objects.all()
+#     orders = Order.objects.all()
+#     shipment_count = shipment_details.count()
+#     total_orders = orders.count() 
+#     user_count = User.objects.exclude(is_staff=True, is_superuser=True).count()  
+    
+#     return render(request,"admin_dashboard.html",{'users':users,'total_orders':total_orders,'shipment_count':shipment_count,'user_count':user_count,'total_sales':total_sales})
+
+
+from django.db.models import Sum
+from django.contrib.auth.models import User
+from .models import Order, CartItems, Shipment
+
 def admindashboard(request):
-    return render(request,"admin_dashboard.html")
+    # Get the total quantity sold for each product (completed orders only)
+    sold_products = CartItems.objects.filter(cart__order__status='completed') \
+                                     .values('product_id') \
+                                     .annotate(total_qty_sold=Sum('product_qty')) \
+                                     .order_by('product_id')
+
+    # Count all users excluding admins
+    user_count = User.objects.exclude(is_staff=True, is_superuser=True).count()
+
+    # Count total orders
+    total_orders = Order.objects.count()
+
+    # Count total shipments
+    shipment_details = Shipment.objects.all()
+    shipment_count = shipment_details.count()
+
+    # Calculate the total sales amount (sum of product_total values in CartItems)
+    total_sales = CartItems.objects.filter(cart__order__status='completed') \
+                                   .aggregate(total_sales=Sum('product_total'))['total_sales'] or 0
+                                   
+    top_selling = CartItems.objects.values('product_id__product_name') \
+                                   .annotate(total_qty_sold=Sum('product_qty')) \
+                                   .order_by('-total_qty_sold')[:1]
+    least_purchased = CartItems.objects.values('product_id__product_name') \
+                                       .annotate(total_qty_sold=Sum('product_qty')) \
+                                       .order_by('total_qty_sold')[:1]
+    
+    # Extract product names from the query result
+    least_product_names = [item['product_id__product_name'] for item in least_purchased]
+    completed_orders_count = Order.objects.filter(status='completed').count()
+    
+    
+    # Extract product names from the query result
+    top_product_names = [item['product_id__product_name'] for item in top_selling]
+    users = User.objects.all()
+    return render(request, "admin_dashboard.html", {
+        'user_count': user_count,
+        'total_orders': total_orders,
+        'shipment_count': shipment_count,
+        'total_sales': total_sales, 
+        'top_product_names':top_product_names,
+        'least_product_names':least_product_names,
+        'completed_orders_count':completed_orders_count,
+        'users':users,
+    })
+
+
+def admin_userslist(request):
+    shipment_details = Shipment.objects.all()
+    return render(request,'admin_users.html',{'shipment_details':shipment_details})
     
 def about(request):
     return render(request,"about.html")
@@ -87,8 +154,19 @@ def feature(request):
 def Prediction(request):
     return render(request,"Prediction.html")
 
+# def products(request):
+#     products = Product.objects.all()
+#     return render(request, "product.html", {'products': products})
+
+
 def products(request):
+    # Check if the user is authenticated
+    if not request.user.is_authenticated:
+        return redirect('userlogin')  # Redirect to the login page if the user is not authenticated
+    
+    # If the user is authenticated, proceed to show the products
     products = Product.objects.all()
+    
     return render(request, "product.html", {'products': products})
 
 
@@ -374,3 +452,7 @@ def shipment(request):
 
 def trackshipment(request):
     return render(request,"trackshipment.html")
+
+def admin_feedback(request):
+    feedbacks = Feedback.objects.all()
+    return render(request , 'admin_feedback.html',{'feedbacks':feedbacks})

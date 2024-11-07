@@ -210,82 +210,37 @@
         <!-- Main Content -->
         <main class="main-content">
             <div class="top-bar">
-                <h1>Dashboard</h1>
+                <h1>Users List</h1>
                 <!-- <input type="text" placeholder="Search..." class="search-bar"> -->
             </div>
 
             <!-- Today's Sales Section -->
             <div class="sales-overview">
-                <div class="card">
-                    <h3> Shipment Sales</h3>
-                    <p>{{ shipment_count }}</p>
-                    <span></span>
-                </div>
-                <div class="card">
-                    <h3>Completed Orders Count</h3>
-                    <p>{{ completed_orders_count }}</p>
-                    <span></span>
-                </div>
-                
-                <div class="card">
-                    <h3>Total Customers</h3>
-                    <p>{{ user_count }}</p>
-                    <span></span>
-                </div>
-                <div class="card">
-                    <h3>Total Sales</h3>
-                    <p>{{ total_sales }}</p>
-                    <span></span>
-                </div>
             </div>
 
             <!-- Charts and Analytics Section -->
             <div class="analytics">
-                <div class="chart-card">
-                    <h3>Most Purchased Product</h3>
-                    <ol>
-                        {% for name in top_product_names %}
-                            <li>{{ name }}</li>
-                        {% empty %}
-                            <li>No sales data available.</li>
-                        {% endfor %}
-                    </ol>
-                    
-                </div>
-                <div class="chart-card">
-                    <h3>Least Purchased Product</h3>
-                    
-                    <ol>
-                        {% for names in least_product_names %}
-                            <li>{{ names }}</li>
-                        {% empty %}
-                            <li>No sales data available.</li>
-                        {% endfor %}
-                    </ol>
-                    
-                </div>
+                
             </div>
 
             <div class="customer-table">
-                <h3>Users List</h3>
+                <h3>Feedbacks</h3>
                 <table>
                     <thead>
                         <tr>
-                            <th>User ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Username</th>
+                            <th>Name</th>
                             <th>Email</th>
+                            <th>Rating</th>
+                            <th>Comments</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for user in users %}
+                        {% for feedback in feedbacks %}
                         <tr>
-                            <td>{{ user.id }}</td>
-                            <td>{{ user.first_name }}</td>
-                            <td>{{ user.last_name }}</td>
-                            <td>{{ user.username }}</td>
-                            <td>{{ user.email }}</td>
+                            <td>{{ feedback.name }}</td>
+                            <td>{{ feedback.email }}</td>
+                            <td>{{ feedback.rating }}</td>
+                            <td>{{ feedback.comments }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>

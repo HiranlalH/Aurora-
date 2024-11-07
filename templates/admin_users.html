@@ -201,7 +201,7 @@
             </div>
             <ul class="sidebar-menu">
                 <li class="active"><a href="{% url 'admin_dashboard' %}" style="color:white; padding-top: 50px; font-size: 200%; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                <li><a href="{% url 'admin_userslist' %}" style="color:white; padding-top: 50px; font-size: 150%; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"><i class="fas fa-user"></i> Shipment Details</a></li>
+                <li><a href="{% url 'admin_userslist' %}" style="color:white; padding-top: 50px; font-size: 150%; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"><i class="fas fa-user"></i> Users List</a></li>
                 <li><a href="{% url 'admin_feedback' %}"style="color:white; padding-top: 50px; font-size: 150%; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"><i class="fas fa-chart-bar"></i> Feedback</a></li>
                 <li><a href="{% url 'userlogout' %}"style="color:white; padding-top: 50px; font-size: 150%; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>
@@ -210,88 +210,45 @@
         <!-- Main Content -->
         <main class="main-content">
             <div class="top-bar">
-                <h1>Dashboard</h1>
+                <h1>Shipment Details</h1>
                 <!-- <input type="text" placeholder="Search..." class="search-bar"> -->
             </div>
 
             <!-- Today's Sales Section -->
             <div class="sales-overview">
-                <div class="card">
-                    <h3> Shipment Sales</h3>
-                    <p>{{ shipment_count }}</p>
-                    <span></span>
-                </div>
-                <div class="card">
-                    <h3>Completed Orders Count</h3>
-                    <p>{{ completed_orders_count }}</p>
-                    <span></span>
-                </div>
-                
-                <div class="card">
-                    <h3>Total Customers</h3>
-                    <p>{{ user_count }}</p>
-                    <span></span>
-                </div>
-                <div class="card">
-                    <h3>Total Sales</h3>
-                    <p>{{ total_sales }}</p>
-                    <span></span>
-                </div>
             </div>
 
             <!-- Charts and Analytics Section -->
             <div class="analytics">
-                <div class="chart-card">
-                    <h3>Most Purchased Product</h3>
-                    <ol>
-                        {% for name in top_product_names %}
-                            <li>{{ name }}</li>
-                        {% empty %}
-                            <li>No sales data available.</li>
-                        {% endfor %}
-                    </ol>
-                    
-                </div>
-                <div class="chart-card">
-                    <h3>Least Purchased Product</h3>
-                    
-                    <ol>
-                        {% for names in least_product_names %}
-                            <li>{{ names }}</li>
-                        {% empty %}
-                            <li>No sales data available.</li>
-                        {% endfor %}
-                    </ol>
-                    
-                </div>
+                
             </div>
 
+            <!-- Customer Table -->
             <div class="customer-table">
-                <h3>Users List</h3>
+                <h3>Shipment Details List</h3>
                 <table>
                     <thead>
                         <tr>
-                            <th>User ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Username</th>
-                            <th>Email</th>
+                            <th>Name</th>
+                            <th>Mobile</th>
+                            <th>City</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for user in users %}
                         <tr>
-                            <td>{{ user.id }}</td>
-                            <td>{{ user.first_name }}</td>
-                            <td>{{ user.last_name }}</td>
-                            <td>{{ user.username }}</td>
-                            <td>{{ user.email }}</td>
+                            {% for shipment in shipment_details %}
+                            <td>{{ shipment.fullname }}</td>
+                            <td>{{ shipment.mobile }}</td>
+                            <td>{{ shipment.city }}</td>
                         </tr>
+                       
                         {% endfor %}
+                        
                     </tbody>
                 </table>
             </div>
-            
+        </main>
+    </div>
 
     <!-- Include Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

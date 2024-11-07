@@ -223,7 +223,7 @@ button:hover {
         {% else %}
         <h2>Register</h2>
         {% endif %}
-        <form action="#" method="POST">
+        <form arole = "form" method="POST">
             {% csrf_token %}
             <div class="input-box">
                 <input type="text" name="first_name" required>

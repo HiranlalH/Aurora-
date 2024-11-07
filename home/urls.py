@@ -28,6 +28,8 @@ urlpatterns = [
     path('download_invoice/<int:order_id>/', download_invoice, name='download_invoice'),
     path('trackshipment/', trackshipment, name='trackshipment'), 
     path('shipment/',shipment, name='shipment'),
+    path('admin_userslist',admin_userslist,name = 'admin_userslist'),
+    path('admin_feedback/',admin_feedback, name='admin_feedback'),
     
 ]
 
