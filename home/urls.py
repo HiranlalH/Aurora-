@@ -20,13 +20,13 @@ urlpatterns = [
     path('feedback/',feedback,name='feedback'),
     path('checkout/', checkout, name='checkout'), 
     path('payment/',payment,name='payment'),
-    path('confirmation/',confirmation,name='confirmation'),
+    path('confirm-payment/',confirm_payment,name='confirm_payment'),
+    path('confirmation/<int:order_id>',confirmation,name='confirmation'),
     path('add_to_cart/<int:p_id>', add_to_cart, name="add_to_cart"),
     path('cart', cart, name='cart'),  # Ensure user_id is part of the path
     path('clear_cart/<int:user_id>/', clear_cart, name='clear_cart'),
-    path('download_invoice/<int:user_id>/', download_invoice, name='download_invoice'),
-    path('order_hist', order_hist, name='order_hist'),
-    path('trackshipment', trackshipment, name='trackshipment'),
+    path('download_invoice/<int:order_id>/', download_invoice, name='download_invoice'),
+    path('shipment/', shipment, name='shipment'), 
     
 ]
 

@@ -85,7 +85,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for item in cart %}
+                {% for item in cart_items %}
                 <tr>
                     <td>{{ item.product_id.product_name }}</td>
                     <td>Rs. {{ item.product_id.unit_price }}</td>
@@ -93,10 +93,13 @@
                     <td>Rs. {{ item.product_total }}</td>
                 </tr>
                 {% endfor %}
+
+                <span>Total Amount:{{order.total}}</span>
             </tbody>
+
         </table>
         <div>
-            <form action="{% url 'download_invoice' user_id=user.id  %}" method="post" style="display:inline;">
+            <form action="{% url 'download_invoice' order_id  %}" method="post" style="display:inline;">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-primary">Download Invoice</button>
             </form>
