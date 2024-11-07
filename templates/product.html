@@ -146,7 +146,7 @@
                                 <a href="{% url 'Prediction' %}" class="dropdown-item">Prediction</a>
                                 <a href="{% url 'testimonial' %}" class="dropdown-item">Testimonial</a>
                                 <a href="{% url 'blog' %}" class="dropdown-item">Blog Articles</a>
-                                <a href="{% url 'error' %}" class="dropdown-item">Error Page</a>
+                                <!-- <a href="{% url 'error' %}" class="dropdown-item">Error Page</a> -->
                                 <a href="{% url 'feedback' %}" class="dropdown-item">Feedback Page</a>
 
 
@@ -219,78 +219,7 @@
                         </div>
                         {% endif %}
                         {% endfor %}
-                        <!-- <div class="col-md-6 col-lg-3">
-                            <div class="product-item text-center border h-100 p-4 rounded">
-                                <img class="img-fluid mb-4" src="{% static 'img/face cream.jpg' %}" alt="Face Cream">
-                                <a href="#" class="h6 d-inline-block mb-2">Face Cream</a>
-                                <h5 class="mb-3">Rs. 410</h5>
-                                <input type="number" min="0" value="0" id="faceCreamQty" class="form-control mb-2"
-                                    placeholder="Quantity">
-                            </div>
-                        </div> -->
-                        <!-- <div class="col-md-6 col-lg-3">
-                            <div class="product-item text-center border h-100 p-4 rounded">
-                                <img class="img-fluid mb-4" src="{% static 'img/facewash.jpg' %}" alt="Face Wash">
-                                <a href="#" class="h6 d-inline-block mb-2">Face Wash</a>
-                                <h5 class="mb-3">Rs. 210</h5>
-                                <input type="number" min="0" value="0" id="facewashQty" class="form-control mb-2"
-                                    placeholder="Quantity">
-                            </div>
-                        </div> -->
-                        <!-- <div class="col-md-6 col-lg-3">
-                            <div class="product-item text-center border h-100 p-4 rounded">
-                                <img class="img-fluid mb-4" src="{% static 'img/cleanser.jpg' %}" alt="Cleanser">
-                                <a href="#" class="h6 d-inline-block mb-2">Cleanser</a>
-                                <h5 class="mb-3">Rs. 200</h5>
-                                <input type="number" min="0" value="0" id="cleanserQty" class="form-control mb-2"
-                                    placeholder="Quantity">
-                            </div>
-                        </div> -->
-                        <!-- <div class="col-md-6 col-lg-3">
-                            <div class="product-item text-center border h-100 p-4 rounded">
-                                <img class="img-fluid mb-4" src="{% static 'img/face serum.jpg' %}" alt="Face Serum">
-                                <a href="#" class="h6 d-inline-block mb-2">Face Serum</a>
-                                <h5 class="mb-3">Rs. 380</h5>
-                                <input type="number" min="0" value="0" id="faceSerumQty" class="form-control mb-2"
-                                    placeholder="Quantity">
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3">
-                            <div class="product-item text-center border h-100 p-4 rounded">
-                                <img class="img-fluid mb-4" src="{% static 'img/sunscreen.jpg' %}" alt="Sunscreen">
-                                <a href="#" class="h6 d-inline-block mb-2">Sunscreen</a>
-                                <h5 class="mb-3">Rs. 300</h5>
-                                <input type="number" min="0" value="0" id="suncreenQty" class="form-control mb-2"
-                                    placeholder="Quantity">
-                            </div>
-                        </div> -->
-                        <!-- <div class="col-md-6 col-lg-3">
-                            <div class="product-item text-center border h-100 p-4 rounded">
-                                <img class="img-fluid mb-4" src="{% static 'img/lip balm.png' %}" alt="Lip Balm">
-                                <a href="#" class="h6 d-inline-block mb-2">Lip Balm</a>
-                                <h5 class="mb-3">Rs. 190</h5>
-                                <input type="number" min="0" value="0" id="LipBalmQty" class="form-control mb-2"
-                                    placeholder="Quantity">
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3">
-                            <div class="product-item text-center border h-100 p-4 rounded">
-                                <img class="img-fluid mb-4" src="{% static 'img/Shampoo.jpg' %}" alt="Shampoo">
-                                <a href="#" class="h6 d-inline-block mb-2">Shampoo</a>
-                                <h5 class="mb-3">Rs. 874</h5>
-                                <input type="number" min="0" value="0" id="shampooQty" class="form-control mb-2"
-                                    placeholder="Quantity">
-                            </div>
-                        </div> -->
-                        <!-- <div class="col-md-6 col-lg-3">
-                            <div class="product-item text-center border h-100 p-4 rounded">
-                                <img class="img-fluid mb-4" src="{% static 'img/conditioner.jpg' %}" alt="Conditioner">
-                                <a href="#" class="h6 d-inline-block mb-2">Conditioner</a>
-                                <h5 class="mb-3">Rs. 625</h5>
-                                <input type="number" min="0" value="0" id="conditionerQty" class="form-control mb-2"
-                                    placeholder="Quantity">
-                            </div>
-                        </div> -->
+                
                         
                     </div>
                 </form>
@@ -298,73 +227,13 @@
         </div>
     </div>
     <center>
+        <a href="{% url 'cart' %}">
         <button type="button" class="btn btn-primary py-2 px-4">
-            <a href="{% url 'cart' user_id=request.user.id %}" style="color:white; text-decoration: none;">View Cart</a>
+            View Cart
         </button>
+    </a>
     </center>
     
-    <!-- Product End -->
-
-    <!-- <script>
-        // Function to get cart items from localStorage or return empty array
-        function getCartItems() {
-            return JSON.parse(localStorage.getItem("cartItems")) || [];
-        }
-
-        // Function to save cart items to localStorage
-        function saveCartItems(cartItems) {
-            localStorage.setItem("cartItems", JSON.stringify(cartItems));
-        }
-
-        // Add event listener to the form submission
-        document.getElementById("productForm").addEventListener("submit", function (event) {
-            event.preventDefault(); // Prevent page reload
-
-            let cartItems = getCartItems(); // Get existing cart items
-
-            // Function to add or update product in the cart
-            const addOrUpdateCartItem = (name, price, quantity) => {
-                const itemIndex = cartItems.findIndex(item => item.name === name);
-                if (itemIndex > -1) {
-                    // Update quantity if product already in cart
-                    cartItems[itemIndex].quantity += quantity;
-                } else {
-                    // Add new item to cart
-                    cartItems.push({ name: name, price: price, quantity: quantity });
-                }
-            };
-
-            // Get the quantity entered for each product
-            const bodyLotionQty = parseInt(document.getElementById("bodyLotionQty").value);
-            const faceCreamQty = parseInt(document.getElementById("faceCreamQty").value);
-            const facewashQty = parseInt(document.getElementById("facewashQty").value);
-            const cleanserQty = parseInt(document.getElementById("cleanserQty").value);
-            const faceSerumQty = parseInt(document.getElementById("faceSerumQty").value);
-            const suncreenQty = parseInt(document.getElementById("suncreenQty").value);
-            const LipBalmQty = parseInt(document.getElementById("LipBalmQty").value);
-            const shampooQty = parseInt(document.getElementById("shampooQty").value);
-            const conditionerQty = parseInt(document.getElementById("conditionerQty").value);
-
-            // Add products to cart only if quantity is greater than 0
-            if (bodyLotionQty > 0) addOrUpdateCartItem("Body Lotion", 500, bodyLotionQty);
-            if (faceCreamQty > 0) addOrUpdateCartItem("Face Cream", 410, faceCreamQty);
-            if (facewashQty > 0) addOrUpdateCartItem("Facewash", 210, facewashQty);
-            if (cleanserQty > 0) addOrUpdateCartItem("Cleanser", 200, cleanserQty);
-            if (faceSerumQty > 0) addOrUpdateCartItem("Face Serum", 380, faceSerumQty);
-            if (suncreenQty > 0) addOrUpdateCartItem("Sunscreen", 300, suncreenQty);
-            if (LipBalmQty > 0) addOrUpdateCartItem("Lip Balm", 190, LipBalmQty);
-            if (shampooQty > 0) addOrUpdateCartItem("Shampoo", 874, shampooQty);
-            if (conditionerQty > 0) addOrUpdateCartItem("Conditioner", 625, conditionerQty);
-
-            saveCartItems(cartItems); // Save updated cart items to localStorage
-
- 
-        
-            
-        });
-
-    </script> -->
-
 
     <!-- Footer Start -->
     <div class="container-fluid bg-white footer">

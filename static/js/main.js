@@ -95,55 +95,6 @@
 
 
 
-// const cart = [];
-// const cartItemsContainer = document.getElementById('cart-items');
-// const cartCount = document.getElementById('cart-count');
-// const cartTotal = document.getElementById('cart-total');
-// const checkoutBtn = document.getElementById('checkout-btn');
-
-// Add to Cart Button Functionality
-// document.querySelectorAll('.add-to-cart').forEach(button => {
-//     button.addEventListener('click', (event) => {
-//         const product = event.target.closest('.product');
-//         const productName = product.getAttribute('data-name');
-//         const productPrice = parseFloat(product.getAttribute('data-price'));
-//         addToCart(productName, productPrice);
-//     });
-// });
-
-// Function to Add Item to Cart
-// function addToCart(name, price) {
-//     cart.push({ name, price });
-//     updateCart();
-// }
-
-// Function to Update Cart
-// function updateCart() {
-//     cartItemsContainer.innerHTML = '';
-//     let total = 0;
-
-//     cart.forEach(item => {
-//         const li = document.createElement('li');
-//         li.textContent = `${item.name} - $${item.price.toFixed(2)}`;
-//         cartItemsContainer.appendChild(li);
-//         total += item.price;
-//     });
-
-//     cartCount.textContent = cart.length;
-//     cartTotal.textContent = total.toFixed(2);
-// }
-
-// Checkout Button Functionality (Redirect to Payment Gateway)
-checkoutBtn.addEventListener('click', () => {
-    if (cart.length > 0) {
-        // Here you would integrate with your payment gateway (e.g., Stripe, PayPal)
-        alert(`Proceeding to payment gateway with total: $${cartTotal.textContent}`);
-        window.location.href = 'payment-gateway-url'; // Replace with actual payment gateway URL
-    } else {
-        alert('Your cart is empty!');
-    }
-});
-
 
 
 

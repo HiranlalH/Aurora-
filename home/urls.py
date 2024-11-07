@@ -18,11 +18,17 @@ urlpatterns = [
     path('product/',products,name='product'),
     path('testimonial/',testimonial,name='testimonial'),
     path('feedback/',feedback,name='feedback'),
-    path('checkout/<int:user_id>/', checkout, name='checkout'), 
+    path('checkout/', checkout, name='checkout'), 
     path('payment/',payment,name='payment'),
     path('confirmation/',confirmation,name='confirmation'),
     path('add_to_cart/<int:p_id>', add_to_cart, name="add_to_cart"),
-    path('cart/<int:user_id>/', cart, name='cart'),  # Ensure user_id is part of the path
-    path('clear-cart/<int:user_id>/', clear_cart, name='clear_cart'),
+    path('cart', cart, name='cart'),  # Ensure user_id is part of the path
+    path('clear_cart/<int:user_id>/', clear_cart, name='clear_cart'),
+    path('download_invoice/<int:user_id>/', download_invoice, name='download_invoice'),
+    path('order_hist', order_hist, name='order_hist'),
+    path('trackshipment', trackshipment, name='trackshipment'),
+    
 ]
 
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

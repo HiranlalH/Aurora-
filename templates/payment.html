@@ -45,7 +45,7 @@
         </div>
 
         <div class="payment-option text-center">
-            <h3>Pay Using Card</h3>
+            <h3>Amount to be paid: {{total_amount}}</h3>
             <form id="cardPaymentForm" action="{% url 'confirmation' %}" method="POST">
                 {% csrf_token %}
                 <div class="form-group">

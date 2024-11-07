@@ -1,12 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .models import Product, Product_cart, Feedback, Contact
 from django.contrib import messages
+from reportlab.lib.pagesizes import A4
+from reportlab.pdfgen import canvas
+from io import BytesIO
 
 
 
-# Create your views here.
 def index(request):
     return render(request,"index.html")
 
@@ -52,14 +55,13 @@ def userreg(request):
             return render(request, 'userreg.html', {'msg':msg})
     return render(request,"userreg.html")
 
-def admindashboard(request):
-    return render(request,"admin_dashboard.html")
-    
-
 def userlogout(request):
     logout(request)
     return redirect('userlogin')
 
+def admindashboard(request):
+    return render(request,"admin_dashboard.html")
+    
 def about(request):
     return render(request,"about.html")
     
@@ -88,121 +90,170 @@ def products(request):
     products = Product.objects.all()
     return render(request, "product.html", {'products': products})
 
-# def add_to_cart(request, p_id):
-#     user = request.user
-#     product = Product.objects.get(id = p_id)
-#     if Product_cart.objects.filter(user_id = user).exists():
-#         if Product_cart.objects.filter(product_id = product).exists():
-#             crt = Product_cart.objects.get(user_id = user, product_id = product)
-#             crt.product_qty += 1
-#             crt.save()
-#             return redirect(products)
-#         elif not Product_cart.objects.filter(product_id = product).exists():
-#             crt = Product_cart.objects.create(user_id = user, product_id = product, product_qty = 1, cart_status = True)
-#             crt.save()
-#             return redirect(products)
-#     crt = Product_cart.objects.create(user_id = user, product_id = product, product_qty = 1, cart_status = True)
-#     crt.save()
-#     return redirect(products)
 def add_to_cart(request, p_id):
     user = request.user
-    product = get_object_or_404(Product, id=p_id)  # Safely get the product or return 404
+    product = Product.objects.get(id = p_id)
+    if Product_cart.objects.filter(user_id = user).exists():
+        if Product_cart.objects.filter(user_id = request.user,product_id = product).exists():
+            crt = Product_cart.objects.filter(user_id = request.user, product_id = product).first()
+            crt.product_qty += 1
+            crt.product_total = crt.product_qty*product.unit_price
+            crt.save()
+            return redirect(products)
+        elif not Product_cart.objects.filter(product_id = product).exists():
+            crt = Product_cart.objects.create(user_id = user, product_id = product, product_qty = 1, cart_status = True)
+            crt.save()
+            return redirect(products)
+    crt = Product_cart.objects.create(user_id = user, product_id = product, product_qty = 1, product_total = product.unit_price, cart_status = True)
+    crt.save()
+    return redirect(products)
 
-    # Get or create the cart item for this user and product
-    cart_item, created = Product_cart.objects.get_or_create(
-        user_id=user,
-        product_id=product,
-        defaults={'product_qty': 1, 'cart_status': True}
-    )
 
-    if not created:
-        # If the cart item already exists, increase the quantity
-        cart_item.product_qty += 1
-        cart_item.save()
+def cart(request):
+    # Retrieve the cart items for the user
+    cart = Product_cart.objects.filter(user_id=request.user)
+    total_amount = 0
+    cart_data = []
+    for item in cart:
+        item_total = item.product_id.unit_price * item.product_qty
+        cart_data.append({
+            'product_name': item.product_id.product_name,
+            'unit_price': item.product_id.unit_price,
+            'quantity': item.product_qty,
+            'item_total': item_total,
+        })
+        total_amount += item_total
 
-    return redirect('product')  # Ensure 'products' is a valid URL name
-            
+    return render(request, 'cart.html', {
+        'cart': cart_data,
+        'total_amount': total_amount,
+    })
+
+def checkout(request):
+    cart = Product_cart.objects.filter(user_id=request.user)
+    total_amount = 0
+    cart_data = []
+    for item in cart:
+        item_total = item.product_id.unit_price * item.product_qty
+        cart_data.append({
+            'product_name': item.product_id.product_name,
+            'unit_price': item.product_id.unit_price,
+            'quantity': item.product_qty,
+            'item_total': item_total,
+        })
+        total_amount += item_total
+
+    return render(request, 'checkout.html', {
+        'cart': cart_data,
+        'total_amount': total_amount,
+    })
+
+def payment(request):
+    cart = Product_cart.objects.filter(user_id=request.user)
+    total_amount = 0
+    cart_data = []
+    for item in cart:
+        item_total = item.product_id.unit_price * item.product_qty
+        cart_data.append({
+            'product_name': item.product_id.product_name,
+            'unit_price': item.product_id.unit_price,
+            'quantity': item.product_qty,
+            'item_total': item_total,
+        })
+        total_amount += item_total
+    return render(request,"payment.html",{'total_amount':total_amount})
+
+
+def confirmation(request):
+    cart = Product_cart.objects.filter(user_id=request.user)
     
+    return render(request,"confirmation.html", {'cart': cart})
+
+def cart_display_view(request):
+    cart_items = request.session.get('cart_items', {})
+    return render(request, 'cart.html', {'cart_items': cart_items})
+  
 
 def testimonial(request):
     return render(request,"testimonial.html")
 
 def feedback(request):
     if request.method == "POST":
+        # Get form data from POST request
         name = request.POST.get('name')
         email = request.POST.get('email')
         rating = request.POST.get('rating')
         comments = request.POST.get('comments')
-        feedbk = Feedback.objects.create(name = name, email = email, rating = rating, comments = comments)
+
+        # Create a Feedback object and save it to the database
+        feedbk = Feedback.objects.create(
+            name=name,
+            email=email,
+            rating=rating,
+            comments=comments
+        )
         feedbk.save()
-        return render(request, 'feedback.html')
-    return render(request,"feedback.html")
 
-def payment(request):
-    return render(request,"payment.html")
+        # After saving, return the template with a success message
+        return render(request, 'feedback.html', {'success': True})
+    
+    # Render the form if not a POST request
+    return render(request, "feedback.html")
 
-def cart(request, user_id):
-    # Retrieve the cart items for the user
-    cart_items = request.session.get('cart', [])
-    total_price = sum(item['total_price'] for item in cart_items)  # Calculate total price
+def download_invoice(request, user_id):
+    # Create a response object with PDF content type
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="invoice.pdf"'
 
-    context = {
-        'cart': cart_items,
-        'total_price': total_price,
-    }
-    return render(request, 'cart.html', context)
+    # Create a buffer to hold the PDF data
+    buffer = BytesIO()
+    p = canvas.Canvas(buffer, pagesize=A4)
 
+    # Fetch cart data from session or database as needed
+    cart = Product_cart.objects.filter(user_id = user_id) # Assuming cart data is stored in session
+    print(cart)
 
-def checkout(request, user_id):
-    user = get_object_or_404(User, id=user_id)
-    # Process checkout logic here
-    return render(request, 'checkout.html', {'user': user})
+    # Draw static text headers for the invoice
+    p.drawString(100, 800, "AURORA - Invoice")
+    p.drawString(100, 780, "Thank you for your order!")
 
-def confirmation(request):
-    return render(request,"confirmation.html")
+    # Table headers
+    p.drawString(100, 750, "Product")
+    p.drawString(250, 750, "Unit Price")
+    p.drawString(350, 750, "Quantity")
+    p.drawString(450, 750, "Total Price")
 
+    # Draw each item from the cart with dynamic data
+    y_position = 730
+    for item in cart:
+        p.drawString(100, y_position, item.product_id.product_name)
+        p.drawString(250, y_position, f"Rs. {item.product_id.unit_price}")
+        p.drawString(350, y_position, str(item.product_qty))
+        p.drawString(450, y_position, f"Rs. {item.product_total}")
+        y_position -= 20
 
+    # Finish the PDF and close it
+    p.showPage()
+    p.save()
 
-# def cart_view(request):
-#     if request.method == 'POST':
-#         cart_items = {}
-#         body_lotion_qty = int(request.POST.get('body_lotion', 0))
-#         if body_lotion_qty > 0:
-#             cart_items['Body Lotion'] = {'qty': body_lotion_qty, 'price': 500}
+    # Get the PDF content from the buffer
+    pdf = buffer.getvalue()
+    buffer.close()
 
-#         # Repeat for other products
-#         face_cream_qty = int(request.POST.get('face_cream', 0))
-#         if face_cream_qty > 0:
-#             cart_items['Face Cream'] = {'qty': face_cream_qty, 'price': 410}
+    # Write the PDF content to the response
+    response.write(pdf)
+    return response
 
-#         # Add more products similarly...
-
-#         # Save cart_items in session or pass to context
-#         request.session['cart_items'] = cart_items
-        
-#         return redirect('cart_display')  # Redirect to the cart display page
-
-#     return render(request, 'cart.html')
-
-def cart_display_view(request):
-    cart_items = request.session.get('cart_items', {})
-    return render(request, 'cart.html', {'cart_items': cart_items})
-
-# def clear_cart(request, user_id):
-#     products = Product_cart.objects.filter(user_id = user_id)
-#     usr = User.objects.get(id = user_id)
-#     for product in products:
-#         product.cart_status = False
-#         product.save()
-#     return redirect(cart, usr.id)
 
 def clear_cart(request, user_id):
-    # Clear the cart logic, e.g., clearing session data
-    request.session['cart'] = []  # Example for session-based cart
-
-    # You might also want to reset total_price if you're calculating it based on the cart
-    request.session['total_price'] = 0
+    data = Product_cart.objects.filter(user_id=request.user)
+    data.delete()
 
     return redirect('cart')  # Redirect back to the cart page (make sure 'cart' is defined in your urls)
 
 
+def order_hist(request):
+    return render(request, 'orderhistory.html')
+
+def trackshipment(request):
+    return render(request, 'trackshipment.html')
