@@ -54,15 +54,6 @@ class Contact(models.Model):
     subject = models.CharField(max_length=50)
     message = models.TextField()
 
-# class Shipment(models.Model):
-#     fullname = models.CharField(max_length=100)
-#     mobile = models.IntegerField()
-#     pincode = models.IntegerField()
-#     address1 = models.TextField(max_length=100)
-#     address2 = models.TextField(max_length=100)
-#     landmark = models.TextField(max_length=100)
-#     city = models.TextField(max_length=100)
-#     state = models.TextField(max_length=100)
     
 class Shipment(models.Model):
     fullname = models.CharField(max_length=100)
@@ -72,7 +63,8 @@ class Shipment(models.Model):
     address2 = models.TextField()
     landmark = models.CharField(max_length=255, blank=True, null=True)
     city = models.CharField(max_length=100)
-    state = models.CharField(max_length=50)    
+    state = models.CharField(max_length=50)     
+  
     
 
            

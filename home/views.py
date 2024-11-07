@@ -355,9 +355,8 @@ def shipment(request):
         city = request.POST.get('city')
         state = request.POST.get('state')
         
-        print(fullname, mobile, pincode, address1, address2, landmark, city, state)  # Check form data
-
-        if mobile:  
+        # Check that all required fields are not None
+        if mobile:  # Ensure mobile is provided before saving
             shipment = Shipment(
                 fullname=fullname,
                 mobile=mobile,
@@ -369,5 +368,6 @@ def shipment(request):
                 state=state
             )
             shipment.save()
-            return redirect('payment')
+            return redirect('payment')  # Adjust to your redirect
+
     return render(request, 'shipment.html')
