@@ -328,38 +328,46 @@ def clear_cart(request, user_id):
     return redirect('cart')  # Redirect back to the cart page (make sure 'cart' is defined in your urls)
 
 
+# def shipment(request):
+#     if request.method == "POST":
+#         fullname = request.POST.get('fullname')
+#         mobile = request.POST.get('mobile')
+#         pincode = request.POST.get('pincode')
+#         address = request.POST.get('address')
+#         address2 = request.POST.get('address2')
+#         landmark = request.POST.get('landmark')
+#         city = request.POST.get('city')
+#         state = request.POST.get('state')
+#         shipmnt = Shipment.objects.create(fullname = fullname, mobile = mobile, pincode = pincode, address1 = address, address2 = address2, landmark = landmark, city = city, state=state)
+#         shipmnt.save()
+#         return redirect('payment')
+#     return render(request, "shipment.html")
+
+
 def shipment(request):
-    if request.method == "POST":
-        # Get form data from POST request
+    if request.method == 'POST':
         fullname = request.POST.get('fullname')
-        mobile = request.POST.get('mobile')
+        mobile = request.POST.get('mobile')  # Ensure 'mobile' is retrieved correctly
         pincode = request.POST.get('pincode')
-        address1 = request.POST.get('address1')
+        address1 = request.POST.get('address')
         address2 = request.POST.get('address2')
         landmark = request.POST.get('landmark')
         city = request.POST.get('city')
         state = request.POST.get('state')
-
-        # Check if any of the required fields are missing
-        if not (fullname and mobile and pincode and address1 and address2 and city and state):
-            # If any required fields are missing, return an error message
-            return render(request, "shipment.html", {"error": "All required fields must be filled out!"})
-
-        # Create a Shipment object and save it to the database
-        shipmt = Shipment.objects.create(
-            fullname=fullname,
-            mobile=mobile,
-            pincode=pincode,
-            address1=address1,
-            address2=address2,
-            landmark=landmark,
-            city=city,
-            state=state
-        )
-        shipmt.save()
         
-        # Redirect to the cart display view after successful submission
-        return redirect('cart_display_view')
-    
-    # Render the form if not a POST request
-    return render(request, "shipment.html")
+        print(fullname, mobile, pincode, address1, address2, landmark, city, state)  # Check form data
+
+        if mobile:  
+            shipment = Shipment(
+                fullname=fullname,
+                mobile=mobile,
+                pincode=pincode,
+                address1=address1,
+                address2=address2,
+                landmark=landmark,
+                city=city,
+                state=state
+            )
+            shipment.save()
+            return redirect('payment')
+    return render(request, 'shipment.html')

@@ -54,17 +54,25 @@ class Contact(models.Model):
     subject = models.CharField(max_length=50)
     message = models.TextField()
 
+# class Shipment(models.Model):
+#     fullname = models.CharField(max_length=100)
+#     mobile = models.IntegerField()
+#     pincode = models.IntegerField()
+#     address1 = models.TextField(max_length=100)
+#     address2 = models.TextField(max_length=100)
+#     landmark = models.TextField(max_length=100)
+#     city = models.TextField(max_length=100)
+#     state = models.TextField(max_length=100)
+    
 class Shipment(models.Model):
     fullname = models.CharField(max_length=100)
-    mobile = models.IntegerField()
-    pincode = models.IntegerField()
-    address1 = models.TextField(max_length=100)
-    address2 = models.TextField(max_length=100)
-    landmark = models.TextField(max_length=100)
-    city = models.TextField(max_length=100)
-    state = models.TextField(max_length=100)
-    
-    
+    mobile = models.CharField(max_length=15)  # Ensure `null=True` is not set here if it's required
+    pincode = models.CharField(max_length=10)
+    address1 = models.TextField()
+    address2 = models.TextField()
+    landmark = models.CharField(max_length=255, blank=True, null=True)
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=50)    
     
 
            
