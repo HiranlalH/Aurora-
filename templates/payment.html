@@ -46,7 +46,8 @@
 
         <div class="payment-option text-center">
             <h3>Amount to be paid: {{total_amount}}</h3>
-            <form id="cardPaymentForm" action="{% url 'confirmation' %}" method="POST">
+            <form id="cardPaymentForm" action="{% url 'confirm_payment' %}" method="post">
+
                 {% csrf_token %}
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Card Number" id="cardNumber" required pattern="\d{16}" title="Please enter a valid card number (16 digits)">

@@ -106,7 +106,7 @@
             <button type="submit" class="btn btn-primary">Back To Cart</button>
         </form>
         
-        <form action="{% url 'payment' %}" method="post" style="display:inline;">
+        <form action="{% url 'shipment' %}" method="post" style="display:inline;">
             {% csrf_token %}
             <button type="submit" class="btn btn-primary">Proceed to Payement</button>
         </form>
