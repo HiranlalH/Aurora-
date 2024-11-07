@@ -371,3 +371,6 @@ def shipment(request):
             return redirect('payment')  # Adjust to your redirect
 
     return render(request, 'shipment.html')
+
+def trackshipment(request):
+    return render(request,"trackshipment.html")

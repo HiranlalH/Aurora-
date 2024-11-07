@@ -26,7 +26,8 @@ urlpatterns = [
     path('cart', cart, name='cart'),  # Ensure user_id is part of the path
     path('clear_cart/<int:user_id>/', clear_cart, name='clear_cart'),
     path('download_invoice/<int:order_id>/', download_invoice, name='download_invoice'),
-    path('shipment/', shipment, name='shipment'), 
+    path('trackshipment/', trackshipment, name='trackshipment'), 
+    path('shipment/',shipment, name='shipment'),
     
 ]
 
