@@ -64,6 +64,8 @@ class Shipment(models.Model):
     landmark = models.CharField(max_length=255, blank=True, null=True)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=50)     
+    
+    
   
     
 

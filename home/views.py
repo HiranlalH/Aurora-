@@ -132,9 +132,15 @@ def admin_userslist(request):
     
 def about(request):
     return render(request,"about.html")
+
+def order_history(request, user_id):
+    # Get the user and retrieve all 'completed' carts for this user
+    user = get_object_or_404(User, id=user_id)  # Fetch the user or return 404 if not found
     
-def blog(request):
-    return render(request,"blog.html")
+    # Fetch all completed carts for the user
+    user_carts = Cart.objects.filter(user=user, cart_status='completed').select_related('user').prefetch_related('cartitems_set')
+    return render(request, 'order_history.html', {'cart' : user_carts})
+
 
 def contact(request):
     if request.method == "POST":
@@ -151,8 +157,6 @@ def contact(request):
 def feature(request):
     return render(request,"feature.html")
 
-def Prediction(request):
-    return render(request,"Prediction.html")
 
 # def products(request):
 #     products = Product.objects.all()

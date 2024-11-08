@@ -11,10 +11,8 @@ urlpatterns = [
     path('userreg/',userreg,name='userreg'),
     path('admin_dashboard/',admindashboard,name='admin_dashboard'),
     path('about/',about,name='about'),
-    path('blog/',blog,name='blog'),
     path('contact/',contact,name='contact'),
     path('feature/',feature,name='feature'),
-    path('Prediction/',Prediction,name='Prediction'),
     path('product/',products,name='product'),
     path('testimonial/',testimonial,name='testimonial'),
     path('feedback/',feedback,name='feedback'),
@@ -30,6 +28,7 @@ urlpatterns = [
     path('shipment/',shipment, name='shipment'),
     path('admin_userslist',admin_userslist,name = 'admin_userslist'),
     path('admin_feedback/',admin_feedback, name='admin_feedback'),
+    path('order_history/<int:user_id>',order_history, name='order_history'),
     
 ]
 
