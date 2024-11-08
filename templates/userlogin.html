@@ -178,11 +178,11 @@ button:hover {
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
-                        <a href="{% url 'index' %}" class="nav-item nav-link">Home</a>
+                        <a href="{% url 'index' %}" class="nav-item nav-link active">Home</a>
                         <a href="{% url 'about' %}" class="nav-item nav-link active">About</a>
-                        <a href="{% url 'product' %}" class="nav-item nav-link">Products</a>
+                        <a href="{% url 'product' %}" class="nav-item nav-link active">Products</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                            <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu bg-light mt-2">
                                 <a href="{% url 'feature' %}" class="dropdown-item">Features</a>
                                 <a href="{% url 'testimonial' %}" class="dropdown-item">Testimonial</a>
@@ -191,7 +191,7 @@ button:hover {
                                 
                             </div>
                         </div>
-                        <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
+                        <a href="{% url 'contact' %}" class="nav-item nav-link active">Contact</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Login</a>
                             <div class="dropdown-menu bg-light mt-2">
