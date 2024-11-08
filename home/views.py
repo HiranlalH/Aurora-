@@ -134,12 +134,10 @@ def about(request):
     return render(request,"about.html")
 
 def order_history(request, user_id):
-    # Get the user and retrieve all 'completed' carts for this user
-    user = get_object_or_404(User, id=user_id)  # Fetch the user or return 404 if not found
-    
-    # Fetch all completed carts for the user
-    user_carts = Cart.objects.filter(user=user, cart_status='completed').select_related('user').prefetch_related('cartitems_set')
-    return render(request, 'order_history.html', {'cart' : user_carts})
+    user = User.objects.filter(id = user_id).first()
+    user_cart = cart = get_object_or_404(Cart.objects.select_related('user').prefetch_related('cartitems_set'), user=request.user, cart_status='completed')
+    print(user_cart)
+    return render(request, 'order_history.html', {'cart' : user_cart})
 
 
 def contact(request):
